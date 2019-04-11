@@ -1,5 +1,7 @@
 let mysql = require('mysql');
 
+var album = require('./album');
+
 let connection = mysql.createConnection({
     host: '134.209.10.140',
     user: 'webrequest',
@@ -14,6 +16,10 @@ connection.connect(function (err) {
 
     console.log('Connected to the MySQL server.');
 
+    //  Connected to Server. 
+    //
+    //
+
     connection.query('USE rotation', function (error, results, fields) {
         if (error) throw error;
     });
@@ -24,10 +30,14 @@ connection.connect(function (err) {
         });
     });
 
-    // CORRECT INSERT SYNTAX
-    connection.query('INSERT INTO `rotation`.`ALBUM` (`Album_id`,`Album_title`,`Category`,`Release_date`,`Add_date`,`Rotation_flag`,`Description`,`Artist`\)VALUES(\'A90\',\'Oil of Every Pearl\\\'s Un-Insides\',\'H\',\'2018-06-15\',\'2018-8-15\',0,\'desc of sophie??!\',\'SOPHIE\'\)\;', function(error, results) {
-        if (error) throw error;
-    });
+    // // CORRECT INSERT SYNTAX
+    // connection.query('INSERT INTO `rotation`.`ALBUM` (`Album_id`,`Album_title`,`Category`,`Release_date`,`Add_date`,`Rotation_flag`,`Description`,`Artist`\)VALUES(\'A90\',\'Oil of Every Pearl\\\'s Un-Insides\',\'H\',\'2018-06-15\',\'2018-8-15\',0,\'desc of sophie??!\',\'SOPHIE\'\)\;', function(error, results) {
+    //     if (error) throw error;
+    // });
+
+    album.add(connection);
+
+    console.log('\nDisplaying all albums in database:\n');
 
     connection.query('SELECT * FROM ALBUM', function(error, results, fields) {
         if (error) throw error;
@@ -35,6 +45,5 @@ connection.connect(function (err) {
             console.log(result);
         });
     });
-
     connection.end();
 });
