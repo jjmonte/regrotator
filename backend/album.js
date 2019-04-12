@@ -16,7 +16,7 @@ var artist = require('./artist');
  * Do we need to delete albums??? 
  */
 module.exports = {
-    add: function addAlbum(connection) {
+    add: function addAlbum(title, artist, released, added, category, desc, rotation, riyl) {
 
         var album_id = "A" + Math.floor((Math.random() * 9999) + 1);
         // check if this id is in the database!!!
