@@ -50,8 +50,12 @@
 let mysql = require("mysql");
 let express = require("express");
 var cors = require('cors');
+const bodyParser = require("body-parser");
 const app = express();
 const router = express.Router();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cors());
 
 let connection = mysql.createConnection({
@@ -81,6 +85,21 @@ router.get("/getAlbums", (req, res) => {
         });
     });
 });
+//THINGS 2 ADD: all of the variables to the const, 
+router.post("/addAlbum", (req, res) => {
+    const {
+        Artist,
+        Album_title
+    } = req.body;
+    connection.query("USE rotation", function (error) {
+        if (error) throw error;
+    });
+
+    connection.query('INSERT INTO ALBUM (Album_title, Artist)' + 'VALUES(\'' + Album_title + '\',\'' + Artist + '\');', function (error, results) {
+        if (error) throw error;
+    });
+});
+
 
 app.use("/api", router);
 app.listen(3001);
