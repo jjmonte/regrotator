@@ -3,6 +3,27 @@
 body {
     font-family: 'Titillium Web', sans-serif;
 }
+.insert-album {
+    margin: 0 auto;
+    width: 5%
+}
+.insert-album__fields{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+input[type=text]{
+    width: 300px;
+    padding: 5px 10px;
+    font-size: 15px;
+    
+}
+button {
+      padding: 5px 10px;
+      font-size: 15px;
+      width: 200px;
+      background-color: lightblue;
+}
 .album-list {
     width: 50%;
     margin: 0 auto;

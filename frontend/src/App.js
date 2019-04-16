@@ -47,27 +47,26 @@ class App extends Component {
   render() {
         const { data } = this.state;
     return (
-      
-      <div className="main">
-          <div style={{ padding: "10px" }}>
+      <div className="page">
+      <div className="insert-album">
+        <div className="insert-album__fields">
           <input
             type="text"
-            style={{ width: "200px" }}
             onChange={e => this.setState({Album_title: e.target.value })}
             placeholder="Album title"
           />
           <input
             type="text"
-            style={{ width: "200px" }}
             onChange={e => this.setState({ Artist: e.target.value })}
             placeholder="Artist"
           />
+          </div>
           <button
             onClick={() =>
               this.addAlbum(this.state.Artist, this.state.Album_title)
             }
           >
-            ADD
+            Add album
           </button>
         </div>
         <div className="album-list">
