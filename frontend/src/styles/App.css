@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+
+body {
+    font-family: 'Titillium Web', sans-serif;
+}
+.album-list {
+    width: 50%;
+    margin: 0 auto;
+}
+.album {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+.album:nth-child(odd){
+    background-color: lightgrey;
+}
+.album__descriptor {
+    width: 250px;
+    padding-left: 25px;
+}
+.album__descriptor:last-child{
+    width: 100px;
+    text-align: center;
+}
+
+.album-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    background-color: darkgray;
+    color: white;
+    padding-top: 5px;
+    font-weight: bolder;
+    padding-bottom: 5px;
+}

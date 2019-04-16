@@ -70,18 +70,23 @@ class App extends Component {
             ADD
           </button>
         </div>
-        <ul>
-          Albums:
+        <div className="album-list">
+          <h1>Albums:</h1>
+          <div className="album-header">
+            <p className="album__descriptor">Album Title</p>
+            <p className="album__descriptor">Artist</p>
+            <p className="album__descriptor">Category</p>
+          </div>
           {data.length <= 0
             ? " No albums found"
             : data.map(dat => (
-                <li style={{ padding: "10px" }} key={data.Album_id}>
-                  <p style={{ color: "red" }}> Album: </p> {dat.Album_title} <br />
-                  <p style={{ color: "blue" }}> Artist: </p> {dat.Artist} <br />
-                  <p style={{ color: "green" }}> Category: </p> {dat.Category}
-                </li>
+                <div className="album" key={data.Album_id}>
+                  <p className="album__descriptor">{dat.Album_title}</p>
+                  <p className="album__descriptor">{dat.Artist}</p>
+                  <p className="album__descriptor">{dat.Category}</p>
+                </div>
               ))}
-        </ul>
+        </div>
       </div>
     );
   }
