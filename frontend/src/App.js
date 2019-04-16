@@ -4,11 +4,14 @@ import axios from 'axios';
 class App extends Component {
   state = {
     data: [],
-    Album_title: null,
-    Artist: null,
+    Album_title: "",
+    Artist: "",
+    Release_date: "",
+    Category: "",
+    Description: "",
+    Rotation: "",
     intervalIsSet: false
   };
-
 
   componentDidMount() {
     this.getAlbums();
@@ -29,11 +32,16 @@ class App extends Component {
     }
   }
 
-  addAlbum = (Artist, Album_title) => {
+// add other params
+  addAlbum = (Album_title, Artist, Release_date, Category, Description, Rotation) => {
     console.log(Artist);
     axios.post("http://localhost:3001/api/addAlbum", {
       Artist: Artist,
-      Album_id: Album_title
+      Album_title: Album_title,
+      Release_date: Release_date,
+      Category: Category,
+      Description: Description,
+      Rotation: Rotation
     });
   };
 
@@ -44,6 +52,8 @@ class App extends Component {
         data: res.data
       }));
   };
+
+  // add input boxes for other parameters
   render() {
         const { data } = this.state;
     return (
@@ -60,10 +70,41 @@ class App extends Component {
             onChange={e => this.setState({ Artist: e.target.value })}
             placeholder="Artist"
           />
-          </div>
+
+          <input
+            type="text"
+            style={{ width: "100px" }}
+            onChange={e => this.setState({Release_date: e.target.value })}
+            placeholder="Release date"
+          />
+          <input
+            type="text"
+            style={{ width: "50px" }}
+            onChange={e => this.setState({Category: e.target.value })}
+            placeholder="Category"
+          />
+          <input
+            type="text"
+            style={{ width: "1000px", height: "20px" }}
+            onChange={e => this.setState({Description: e.target.value })}
+            placeholder="Description"
+          />
+          <input
+            type="text"
+            style={{ width: "400px" }}
+            onChange={e => this.setState({RIYL: e.target.value })}
+            placeholder="RIYL"
+          />
+          <input
+            type="text"
+            style={{ width: "10px" }}
+            onChange={e => this.setState({Rotation: e.target.value })}
+            placeholder="Rotation"
+          />
+                    </div>
           <button
             onClick={() =>
-              this.addAlbum(this.state.Artist, this.state.Album_title)
+              this.addAlbum(this.state.Artist, this.state.Album_title, this.state.Release_date, this.state.Category, this.state.Description, this.state.Rotation)
             }
           >
             Add album

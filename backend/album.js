@@ -1,6 +1,7 @@
-const readLineSync = require('readline-sync');
+//const readLineSync = require('readline-sync');
 
 var artist = require('./artist');
+// var riyl = require('./riyl')
 /**
  * NOTES:
  * 
@@ -16,81 +17,44 @@ var artist = require('./artist');
  * Do we need to delete albums??? 
  */
 module.exports = {
-    add: function addAlbum(title, artist, released, added, category, desc, rotation, riyl) {
+    add: function addAlbum(title, artist, released, category, desc, rotation, riyl, connection) {
 
         var album_id = "A" + Math.floor((Math.random() * 9999) + 1);
         // check if this id is in the database!!!
-        var a_title;
-        var artist_name;
-        var r_date;
+        var a_title = title;
+        var artist_name = artist;
+        var r_date = released;
         var date = new Date();
         var a_date = date.toISOString().slice(0, 10);
-        var category;
-        var desc;
-        var rot_f;
-        var riyl_s;
-        var riyl_a = new Array();
+        var catg = category;
+        var descript = desc;
+        var rot_f = rotation;
+        //var riyl_a = new Array();
 
-        console.log('\n\nCreating a new album entry...\n\n');
+        //riyl_a = riyl.split(', ');
 
-        a_title = readLineSync.question('Enter album title: ');
-        // cannot be null
-        artist_name = readLineSync.question('Enter artist: ');
-        // cannot be null
-        r_date = readLineSync.question('Enter release date: ');
-        category = readLineSync.question('Enter category: ');
-        desc = readLineSync.question('Enter a description: ');
-        riyl = readLineSync.question('Enter RIYL: (Enter, Like, This, Up To, Five) ')
-        rot_s = readLineSync.question('\nDo you want to put this album in rotation? (y/n) ');
-        if (rot_s == 'y') {
-            rot_f = 1;
-        }
-        if (rot_s == 'n') {
-            rot_f = 0;
-        }
 
-        console.log('\nCreated a new album entry with unique id: ' + album_id + 
-        '\n\nTitle: ' + a_title +
-        '\nArtist: ' + artist_name +
-        '\nReleased: ' + release_date +
-        '\nAdd Date: ' + r_date +
-        '\nCategory: ' + category +
-        '\nDescription: ' + desc +
-        '\nRIYL: ' + riyl);
-
-        riyl_a = riyl.split(', ');
-
-        var a_comm = readLineSync.question('\nCommit this entry to the database? (y/n) ');
-
-        if (a_comm == 'y') {
-
-            connection.query('INSERT INTO ALBUM (Album_id, Album_title, Category, Release_date, Add_date, Rotation_flag, Description, Artist)' + 
-            'VALUES(\''+ album_id +'\',\''+ a_title +'\',\''+ category +'\',\''+ r_date 
-            +'\',\''+ a_date +'\', '+ rot_f +',\''+ desc +'\',\''+ artist_name +'\');', function(error, results) {
+        connection.query('INSERT INTO ALBUM (Album_id, Album_title, Category, Release_date, Add_date, Rotation_flag, Description, Artist)' + 
+        'VALUES(\''+ album_id +'\',\''+ a_title +'\',\''+ catg +'\',\''+ r_date 
+        +'\',\''+ a_date +'\', '+ rot_f +',\''+ descript +'\',\''+ artist_name +'\');', function(error, results) {
             if (error) throw error;
-            });
+        });
+    
+        // for(i in riyl_a) {
+        //     var temp_id;
+        //     connection.query('SELECT Artist_id FROM rotation.ARTIST WHERE Artist_name = "'+ riyl_a[i] +'"', function(error, results, fields) {
+        //         if (error) throw error;
+        //         if (results) {
+        //             temp_id = artist.addAuto(connection);   
+        //         }
+        //         else temp_id = results[0].Artist_id;
 
-            for(i in riyl_a) {
-                var temp_id;
-                connection.query('SELECT Artist_id FROM rotation.ARTIST WHERE Artist_name = "'+ riyl_a[i] +'"', function(error, results, fields) {
-                    if (error) throw error;
-                    if (results) {
-                        temp_id = artist.addAuto(connection);   
-                    }
-                    else temp_id = results[0].Artist_id;
-
-                    connection.query('INSERT INTO RIYL (Album_id, Artist_id) VALUES (\''+ album_id +'\', \''+ temp_id +'\');', function(error) {
-                        if(error) throw error;
-                    });
-                });
-            }
-            
-
-            console.log('\nEntry committed.');
-        }
-        else if (a_comm == 'n') {
-            console.log('\nEntry cancelled.');
-        }
+        //         connection.query('INSERT INTO RIYL (Album_id, Artist_id) VALUES (\''+ album_id +'\', \''+ temp_id +'\');', function(error) {
+        //             if(error) throw error;
+        //         });
+        //     });
+        // }
+        
     },
     // remove: function delAlbum(connection, selected_row) {
     //     var album_id;
