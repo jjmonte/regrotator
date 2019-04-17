@@ -1,6 +1,7 @@
 //const readLineSync = require('readline-sync');
-
+let mysql = require("mysql");
 var artist = require('./artist');
+var db = require('./db');
 // var riyl = require('./riyl')
 /**
  * NOTES:
@@ -17,7 +18,12 @@ var artist = require('./artist');
  * Do we need to delete albums??? 
  */
 module.exports = {
-    add: function addAlbum(title, artist, released, category, desc, rotation, riyl, connection) {
+
+    add: function addAlbum(title, artist, released, category, desc, rotation, riyl) {
+
+        db.query("USE rotation", function (error) {
+            if (error) throw error;
+        });
 
         var album_id = "A" + Math.floor((Math.random() * 9999) + 1);
         // check if this id is in the database!!!
@@ -33,8 +39,12 @@ module.exports = {
 
         //riyl_a = riyl.split(', ');
 
+        // var sql = "INSERT INTO ALBUM (Album_id, Album_title, Category, Release_date, Add_date, Rotation_flag, Description, Artist)' + 
+        // 'VALUES(\',\''+ a_title +'\',\''+ catg +'\',\''+ r_date 
+        // +'\',\''+ a_date +'\', '+ rot_f +',\''+ descript +'\',\''+ artist_name +'\')"
 
-        connection.query('INSERT INTO ALBUM (Album_id, Album_title, Category, Release_date, Add_date, Rotation_flag, Description, Artist)' + 
+
+        db.query('INSERT INTO ALBUM (Album_id, Album_title, Category, Release_date, Add_date, Rotation_flag, Description, Artist)' + 
         'VALUES(\''+ album_id +'\',\''+ a_title +'\',\''+ catg +'\',\''+ r_date 
         +'\',\''+ a_date +'\', '+ rot_f +',\''+ descript +'\',\''+ artist_name +'\');', function(error, results) {
             if (error) throw error;
