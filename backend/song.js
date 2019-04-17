@@ -15,6 +15,18 @@ module.exports = {
         var insertSongValues = [song_id, title, artist, album_id, track_num, length, req_flag, try_flag, xd_flag, explicit];
         console.log(insertSongValues);
 
+        while (d == 1) {
+            db.query('SELECT * FROM SONG WHERE Song_id = \'' + song_id + '\';', function(error, results) {
+                if (results.length > 0) {
+                    if (result) {
+                        console.log("Duplicate ID found. Generating new ID.");
+                        song_id = "S" + Math.floor((Math.random() * 9999) + 1);
+                    }
+                    else (d++);
+                }
+            });
+        }
+
         db.query(insertSongQuery, insertSongValues, function (err, result) {
             if (err) throw err;
             console.log("1 Album added.");

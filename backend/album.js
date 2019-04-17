@@ -12,7 +12,7 @@ var db = require('./db');
  * No duplicate primary keys!
  * 
  * ADD ALBUM: lead into addSongs after 
- *  RIYL will generate basic artist entries if they are not present in the DB
+ * RIYL will generate basic artist entries if they are not present in the DB
  * 
  * Do we need to delete albums??? 
  */
@@ -34,18 +34,32 @@ module.exports = {
         var catg = category;
         var descript = desc;
         var rot_f = rotation;
-        //var riyl_a = new Array();
 
+        //var riyl_a = new Array();
         //riyl_a = riyl.split(', ');
 
         var insertAlbumQuery = "INSERT INTO ALBUM SET Album_id = ?, Album_title = ?, Category = ?, Release_date = ?, Add_date = ?, Rotation_flag = ?, Description = ?, Artist = ?";
         var insertAlbumValues = [album_id, a_title, catg, r_date, a_date, rot_f, descript, artist_name];
         console.log(insertAlbumValues);
 
+        while (d == 1) {
+            db.query('SELECT * FROM ALBUM WHERE Album_id = \'' + album_id + '\';', function(error, results) {
+                if (error) throw error;
+                if (results.length > 0) {
+                    if (result) {
+                        console.log("Duplicate ID found. Generating new ID.");
+                        album_id = "A" + Math.floor((Math.random() * 9999) + 1);
+                    }
+                    else (d++);
+                }
+            });
+        }
+
         db.query(insertAlbumQuery, insertAlbumValues, function (err, result) {
             if (err) throw err;
             console.log("1 Album added.");
         });
+
         // for(i in riyl_a) {
         //     var temp_id;
         //     connection.query('SELECT Artist_id FROM rotation.ARTIST WHERE Artist_name = "'+ riyl_a[i] +'"', function(error, results, fields) {
@@ -60,7 +74,6 @@ module.exports = {
         //         });
         //     });
         // }
-        
     },
     // remove: function delAlbum(connection, selected_row) {
     //     var album_id;
