@@ -4,13 +4,14 @@ body {
     font-family: 'Titillium Web', sans-serif;
 }
 .insert-album {
+    width: 50%;
     margin: 0 auto;
-    width: 5%
 }
 .insert-album__fields{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    flex-wrap: wrap;
 }
 input[type=text]{
     width: 300px;
