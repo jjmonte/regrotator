@@ -37,6 +37,9 @@ button {
 .album:nth-child(odd){
     background-color: lightgrey;
 }
+.album:nth-child(even){
+    background-color: whitesmoke;
+}
 .album__descriptor {
     width: 250px;
     padding-left: 25px;
