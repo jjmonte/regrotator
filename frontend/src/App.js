@@ -56,6 +56,26 @@ class App extends Component {
   // add input boxes for other parameters
   render() {
         const { data } = this.state;
+        const categoryH = [];
+        const categoryM = [];
+        const categoryL = [];
+        const categoryUnsorted = [];
+        data.forEach(album => {
+          if (album.Rotation_flag === 1){
+            album.Rotation_flag = "✅";
+          } else {
+            album.Rotation_flag = " ";
+          }
+          if (album.Category === 'H'){
+            categoryH.push(album);
+          } else if (album.Category === 'M') {
+            categoryM.push(album);
+          } else if (album.Category === 'L'){
+            categoryL.push(album);
+          } else { 
+            categoryUnsorted.push(album);
+          }
+        });
     return (
       <div className="page">
       <div className="insert-album">
@@ -112,18 +132,64 @@ class App extends Component {
         </div>
         <div className="album-list">
           <h1>Albums:</h1>
+          <h3>H</h3>
           <div className="album-header">
             <p className="album__descriptor">Album Title</p>
             <p className="album__descriptor">Artist</p>
-            <p className="album__descriptor">Category</p>
+            <p className="album__descriptor">In Rotation?</p>
           </div>
-          {data.length <= 0
+          {categoryH.length <= 0
             ? " No albums found"
-            : data.map(dat => (
-                <div className="album" key={data.Album_id}>
-                  <p className="album__descriptor">{dat.Album_title}</p>
-                  <p className="album__descriptor">{dat.Artist}</p>
-                  <p className="album__descriptor">{dat.Category}</p>
+            : categoryH.map(album => (
+                <div className="album" key={album.Album_id}>
+                  <p className="album__descriptor">{album.Album_title}</p>
+                  <p className="album__descriptor">{album.Artist}</p>
+                  <p className="album__descriptor">{album.Rotation_flag}</p>
+                </div>
+              ))}
+          <h3>M</h3>
+          <div className="album-header">
+            <p className="album__descriptor">Album Title</p>
+            <p className="album__descriptor">Artist</p>
+            <p className="album__descriptor">In Rotation?</p>
+          </div>
+          {categoryM.length <= 0
+            ? " No albums found"
+            : categoryM.map(album => (
+                <div className="album" key={album.Album_id}>
+                  <p className="album__descriptor">{album.Album_title}</p>
+                  <p className="album__descriptor">{album.Artist}</p>
+                  <p className="album__descriptor">{album.Rotation_flag}</p>
+                </div>
+              ))}
+          <h3>L</h3>
+          <div className="album-header">
+            <p className="album__descriptor">Album Title</p>
+            <p className="album__descriptor">Artist</p>
+            <p className="album__descriptor">In Rotation?</p>
+          </div>
+          {categoryL.length <= 0
+            ? " No albums found"
+            : categoryL.map(album => (
+                <div className="album" key={album.Album_id}>
+                  <p className="album__descriptor">{album.Album_title}</p>
+                  <p className="album__descriptor">{album.Artist}</p>
+                  <p className="album__descriptor">{album.Rotation_flag}</p>
+                </div>
+              ))}
+          <h3>Uncategorized</h3>
+          <div className="album-header">
+            <p className="album__descriptor">Album Title</p>
+            <p className="album__descriptor">Artist</p>
+            <p className="album__descriptor">In Rotation?</p>
+          </div>
+          {categoryUnsorted.length <= 0
+            ? " No albums found"
+            : categoryUnsorted.map(album => (
+                <div className="album" key={album.Album_id}>
+                  <p className="album__descriptor">{album.Album_title}</p>
+                  <p className="album__descriptor">{album.Artist}</p>
+                  <p className="album__descriptor">{album.Rotation_flag}</p>
                 </div>
               ))}
         </div>
