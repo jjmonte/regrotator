@@ -53,6 +53,12 @@ button {
 .album:nth-child(even){
     background-color: whitesmoke;
 }
+.album:hover {
+    cursor: pointer;
+    background-color: lightgreen;
+    transition: all .3s;
+}
+
 .album__descriptor {
     width: 250px;
     padding-left: 25px;

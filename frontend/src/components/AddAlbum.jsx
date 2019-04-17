@@ -97,7 +97,7 @@ class AddAlbum extends React.Component {
             </label>
           </label>
           <button type="submit" value="Submit">
-            Add album
+            Add Album
           </button>
         </form>
       </div>
