@@ -1,5 +1,4 @@
 var album = require('./album');
-let mysql = require("mysql");
 let express = require("express");
 var cors = require('cors');
 const bodyParser = require("body-parser");
@@ -7,6 +6,7 @@ const app = express();
 const router = express.Router();
 
 var album = require('./album');
+var song = require('./song');
 var db = require('./db');
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -55,22 +55,23 @@ router.post("/addAlbum", (req, res) => {
         Rotation
         
     } = req.body;
-    // connection.query("USE rotation", function (error) {
-    //     if (error) throw error;
-    // });
-    var album_id = "A" + Math.floor((Math.random() * 9999) + 1);
-    var date = new Date();
-    var a_date = date.toISOString().slice(0, 10);
 
     album.add(Album_title, Artist, Release_date, Category, Description, Rotation, null);
-    // connection.query('INSERT INTO ALBUM (Album_id, Album_title, Category, Release_date, Add_date, Rotation_flag, Description, Artist)' + 
-    // 'VALUES(\''+ album_id +'\',\''+ Album_title +'\',\''+ Category +'\',\''+ Release_date 
-    // +'\',\''+ a_date +'\', '+ Rotation +',\''+ Description +'\',\''+ Artist +'\');', function(error, results) {
-    //     if (error) throw error;
-    // });
-    // connection.query('INSERT INTO ALBUM (Album_title, Artist)' + 'VALUES(\'' + Album_title + '\',\'' + Artist + '\');', function (error, results) {
-    //     if (error) throw error;
-    // });
+});
+
+router.post("/addSong", (req, res) => {
+    const {
+        Song_title, 
+        Artist,
+        Album_id,
+        Track_number,
+        Track_length,
+        Try_flag,
+        Explicit
+        
+    } = req.body;
+
+    song.add(Song_title,Artist, Album_id, Track_number, Track_length, null, Try_flag, null, Explicit);
 });
 
 
