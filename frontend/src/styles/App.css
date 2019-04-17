@@ -14,7 +14,7 @@ body {
     flex-wrap: wrap;
 }
 input[type=text]{
-    width: 300px;
+    width: 200px;
     padding: 5px 10px;
     font-size: 15px;
     
@@ -35,6 +35,18 @@ button {
     flex-wrap: nowrap;
     justify-content: space-evenly;
 }
+.album-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    background-color: darkgray;
+    color: white;
+    padding-top: 5px;
+    font-weight: bolder;
+    padding-bottom: 5px;
+}
+
 .album:nth-child(odd){
     background-color: lightgrey;
 }
@@ -49,15 +61,74 @@ button {
     width: 100px;
     text-align: center;
 }
-
-.album-header {
+.album-info {
+    width: 95%;
+    margin: 0 auto;
+    background-color: lightcyan;
+}
+.album-info__description {
+    margin: 0 auto;
+    padding: 5px;
+}
+.album-info__dates {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-evenly;
-    background-color: darkgray;
+    margin: 0 auto;
+}
+
+.song-list {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.song {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    /* height: 40px; */
+}
+.song p {
+    font-size: 15px;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.song:nth-child(odd) {
+    background-color: lightcyan;
+}
+
+.song:nth-child(even) {
+    background-color: lightblue;
+}
+
+.song__descriptor {
+    width: 400px;
+    padding-left: 25px;
+}
+.song__descriptor__emoji {
+    width: 20px;
+    padding-left: 20px;
+    text-align: center;
+}
+.song__descriptor:first-child {
+    width: 30px;
+    text-align: center;
+}
+.song__descriptor:last-child {
+    width: 75px;
+    text-align: center;
+}
+.song-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    background-color: darkcyan;
     color: white;
-    padding-top: 5px;
     font-weight: bolder;
-    padding-bottom: 5px;
 }

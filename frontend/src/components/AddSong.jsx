@@ -78,21 +78,24 @@ class AddSong extends React.Component {
             />
             <input
               name="Track_num"
-              placeholder="Track number"
+              placeholder="Track #"
               type="text"
+              style={{ width: "50px" }}
               value={this.state.Track_num}
               onChange={this.handleChange}
             />
             <input
               name="Length"
               placeholder="Length"
+              style={{ width: "50px" }}
               type="text"
               value={this.state.Length}
               onChange={this.handleChange}
             />
             <input
               name="X_D"
-              placeholder="X/D Pick?"
+              placeholder="X/D?"
+              style={{ width: "50px" }}
               type="text"
               value={this.state.X_D}
               onChange={this.handleChange}
@@ -101,9 +104,9 @@ class AddSong extends React.Component {
               {" "}
               Try track?{" "}
               <input
-                name="Rotation"
+                name="Try"
                 type="checkbox"
-                checked={this.state.Rotation}
+                checked={this.state.Try}
                 onChange={this.handleChange}
               />
             </label>
@@ -111,9 +114,9 @@ class AddSong extends React.Component {
               {" "}
               Explicit?{" "}
               <input
-                name="Rotation"
+                name="Explicit"
                 type="checkbox"
-                checked={this.state.Rotation}
+                checked={this.state.Explicit}
                 onChange={this.handleChange}
               />
             </label>

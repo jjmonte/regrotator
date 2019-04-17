@@ -26,6 +26,24 @@ router.get("/getAlbums", (req, res) => {
         });
     });
 });
+
+router.get("/getSongs", (req, res) => {
+    console.log("fetching songs");
+    db.query("USE rotation", function (error) {
+        if (error) throw error;
+    });
+    
+    const Album_ID  = req.query.Album_ID;
+    let songLookupQuery = "SELECT * FROM SONG WHERE SONG.Album_id = ?";
+
+    db.query(songLookupQuery, Album_ID,  function (error, results) {
+        if (error) throw error;
+        return res.json({
+            success: true,
+            data: results
+        });
+    });
+});
 //THINGS 2 ADD: all of the variables to the const, 
 router.post("/addAlbum", (req, res) => {
     const {
