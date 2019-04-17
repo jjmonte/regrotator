@@ -12,8 +12,8 @@ var db = require('./db');
  * When adding a new album, make sure to check if ID is in the database and generate a new ID if it is already there.
  * No duplicate primary keys!
  * 
- * ADD ALBUM: Must lead into addSongs after! 
- *  RIYL will generate basic artist entries if they are not present in the DB!
+ * ADD ALBUM: lead into addSongs after 
+ *  RIYL will generate basic artist entries if they are not present in the DB
  * 
  * Do we need to delete albums??? 
  */
@@ -75,7 +75,7 @@ module.exports = {
     //         if (error) throw error;
     //     });
     // },
-    update: function updateAlbum(connection, selected_row) {
+    update: function updateAlbum(selected_row) {
         var album_id;
         // Get album_id from selected row
         // Should be able to update any row except ID and rotation
@@ -83,7 +83,7 @@ module.exports = {
 
         // Prompt user by showing the current data in the row (as a form) and allow to change data
         // Then update all data to what form has (except ID & rotation)!
-        connection.query('UPDATE `rotation`.`ALBUM` SET `Album_title`=\'' + a_title +'\', `Category`=\''+ category +'\', ' + 
+        db.query('UPDATE `rotation`.`ALBUM` SET `Album_title`=\'' + a_title +'\', `Category`=\''+ category +'\', ' + 
             '`Release_date`=\''+ r_date +'\', `Add_date`=\''+ a_date +'\', `Description`=\''+ desc +'\', ' +
             '`Artist`=\''+ artist_name +'\' WHERE `Album_id`='+ album_id +';', function(error) {
             if (error) throw error;
@@ -94,7 +94,6 @@ module.exports = {
         // only toggles the rotation flag
         // through a dialog box or right click option?
 
-        connection.query
         connection.query('UPDATE `rotation`.`ALBUM` SET `Rotation_flag`= !`Rotation_flag`' + 
             'WHERE `Album_id`='+ album_id +';', function(error) {
             if (error) throw error;
