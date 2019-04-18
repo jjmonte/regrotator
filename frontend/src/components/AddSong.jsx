@@ -132,7 +132,7 @@ class AddSong extends React.Component {
             </label>
           </label>
           <button type="submit" value="Submit">
-            Add Song
+            Add
           </button>
         </form>
       </div>

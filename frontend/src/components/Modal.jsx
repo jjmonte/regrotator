@@ -34,8 +34,7 @@ class Modal extends Component {
   }
 
   handleOutsideClick(e) {
-
-    if (this.modal == null) {
+    if (this.modal !== null || this.modal !== undefined) {
       if (!this.modal.contains(e.target)) {
         this.props.closeRequest();
         document.removeEventListener("click", this.handleOutsideClick, false);

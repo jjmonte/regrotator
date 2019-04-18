@@ -3,6 +3,7 @@
 body {
     font-family: 'Titillium Web', sans-serif;
 }
+
 .insert-query {
     width: 50%;
     margin: 0 auto;
@@ -23,9 +24,12 @@ button {
     font-size: 15px;
     width: 200px;
     background-color: lightblue;
+    margin: 10px 0;
 }
 button:hover{
     cursor: pointer;
+    background-color: lightskyblue;
+    transition: all .3s;
 }
 .album-list {
     width: 50%;
