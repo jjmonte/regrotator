@@ -35,6 +35,9 @@ button:hover{
     width: 50%;
     margin: 0 auto;
 }
+.filter-selector button{
+   width: 150px;
+}
 .album {
     display: flex;
     flex-direction: row;
@@ -163,7 +166,6 @@ button:hover{
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 2;
     opacity: 1;
-    animation: show .5s ease;
     overflow-x: hidden;
     overflow-y: auto;
 }
