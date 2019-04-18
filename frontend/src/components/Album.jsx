@@ -1,6 +1,9 @@
 import React from "react";
 
 import SongList from './SongList'
+import AddSong from './AddSong';
+import ModalOpener from './ModalOpener';
+
 class Album extends React.Component {
   constructor(props) {
     super(props);
@@ -34,6 +37,11 @@ class Album extends React.Component {
                         <p className="album-info__add-date"><b>Add date:</b> {this.props.adddate.substring(0, 10)}</p>
                         <p className="album-info__release-date"><b>Release date:</b> {this.props.releasedate.substring(0, 10)}</p>
                     </div>
+                    <span style={{ textAlign: "center" }}>
+                    <ModalOpener buttonLabel="Add Song">
+                      <AddSong album={this.props.id} title={this.props.title} artist={this.props.artist} />
+                    </ModalOpener>
+                    </span>
                 </div>
                 <SongList album={this.props.id} />
             </React.Fragment>

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Reg Rotator",
+  "name": "A digitized version of radio station regular rotation",
   "icons": [
     {
       "src": "favicon.ico",

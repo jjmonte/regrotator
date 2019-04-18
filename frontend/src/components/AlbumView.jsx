@@ -98,6 +98,7 @@ class AlbumView extends React.Component {
               : categoryM.map(album => (
                   <Album
                     key={album.Album_id}
+                    id={album.Album_id}
                     title={album.Album_title}
                     artist={album.Artist}
                     rotation={album.Rotation_flag}
@@ -117,6 +118,7 @@ class AlbumView extends React.Component {
               : categoryL.map(album => (
                   <Album
                     key={album.Album_id}
+                    id={album.Album_id}
                     title={album.Album_title}
                     artist={album.Artist}
                     rotation={album.Rotation_flag}
@@ -136,6 +138,7 @@ class AlbumView extends React.Component {
               : categoryA.map(album => (
                   <Album
                     key={album.Album_id}
+                    id={album.Album_id}
                     title={album.Album_title}
                     artist={album.Artist}
                     rotation={album.Rotation_flag}
@@ -155,6 +158,7 @@ class AlbumView extends React.Component {
               : categoryUnsorted.map(album => (
                   <Album
                     key={album.Album_id}
+                    id={album.Album_id}
                     title={album.Album_title}
                     artist={album.Artist}
                     rotation={album.Rotation_flag}

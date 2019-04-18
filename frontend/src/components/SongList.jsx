@@ -33,7 +33,6 @@ class SongList extends React.Component {
   }
 
   getSongs = () => {
-      let res = [];
     axios
       .get("http://localhost:3001/api/getSongs", {
         params: {

@@ -7,13 +7,14 @@ class AddSong extends React.Component {
     this.state = {
       Song_title: "",
       Artist: "",
-      Album_name: "",
+      Album_id: this.props.album,
       Track_num: "",
-      Length: "",
+      Minutes: "",
+      Seconds: "",
       X_D: "",
-      Explicit: "0",
-      Request: "0",
-      Try: "0"
+      Explicit: false,
+      Request: false,
+      Try: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -23,11 +24,15 @@ class AddSong extends React.Component {
   handleChange(event) {
     const target = event.target;
     const name = target.name;
-    const value = target.type === "checkbox" ? +target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     this.setState({ [name]: value });
   }
 
   addAlbum = currentState => {
+    this.state.Explicit = + this.state.Explicit;
+    this.state.Request = + this.state.Request;
+    this.state.Try = + this.state.Try;
+    console.log(currentState);
     axios.post("http://localhost:3001/api/addAlbum", this.state);
   };
 
@@ -39,21 +44,23 @@ class AddSong extends React.Component {
     this.setState({
       Song_title: "",
       Artist: "",
-      Album_name: "",
       Track_num: "",
-      Length: "",
+      Minutes: "",
+      Seconds: "",
       X_D: "",
-      Explicit: "0",
-      Request: "0",
-      Try: "0"
+      Explicit: false,
+      Request: false,
+      Try: false
     });
   }
 
   render() {
     return (
-      <div className="insert-album">
+      <div className="insert-query">
         <h1>Add Song:</h1>
-        <form onSubmit={this.handleSubmit} className="insert-album__fields">
+        <h3>{this.props.title}</h3>
+        <h4>{this.props.artist}</h4>
+        <form onSubmit={this.handleSubmit} className="insert-query__fields">
           <label>
             <input
               name="Song_title"
@@ -70,10 +77,20 @@ class AddSong extends React.Component {
               onChange={this.handleChange}
             />
             <input
-              name="Album_name"
-              placeholder="Album name"
+              name="Minutes"
+              placeholder="Minutes"
+              style={{ width: "60px" }}
               type="text"
-              value={this.state.Album_name}
+              value={this.state.Minutes}
+              onChange={this.handleChange}
+            />{" "}
+            :{" "}
+            <input
+              name="Seconds"
+              placeholder="Seconds"
+              style={{ width: "60px" }}
+              type="text"
+              value={this.state.Seconds}
               onChange={this.handleChange}
             />
             <input
@@ -85,14 +102,6 @@ class AddSong extends React.Component {
               onChange={this.handleChange}
             />
             <input
-              name="Length"
-              placeholder="Length"
-              style={{ width: "50px" }}
-              type="text"
-              value={this.state.Length}
-              onChange={this.handleChange}
-            />
-            <input
               name="X_D"
               placeholder="X/D?"
               style={{ width: "50px" }}
@@ -100,6 +109,7 @@ class AddSong extends React.Component {
               value={this.state.X_D}
               onChange={this.handleChange}
             />
+            <br />
             <label>
               {" "}
               Try track?{" "}

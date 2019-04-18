@@ -65,13 +65,14 @@ router.post("/addSong", (req, res) => {
         Artist,
         Album_id,
         Track_number,
-        Track_length,
+        Minutes,
+        Seconds,
+        XDFlag,
         Try_flag,
         Explicit
         
     } = req.body;
-
-    song.add(Song_title,Artist, Album_id, Track_number, Track_length, null, Try_flag, null, Explicit);
+    song.add(Song_title, Artist, Album_id, Track_number, Track_length, XDFlag, Try_flag, null, Explicit);
 });
 
 

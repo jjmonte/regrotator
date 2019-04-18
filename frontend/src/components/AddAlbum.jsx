@@ -10,7 +10,7 @@ class AddAlbum extends React.Component {
       Release_date: "",
       Category: "",
       Description: "",
-      Rotation: "0"
+      Rotation: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,6 +25,7 @@ class AddAlbum extends React.Component {
   }
   
   addAlbum = (currentState) => {
+    this.state.Rotation = + this.state.Rotation;
     axios.post("http://localhost:3001/api/addAlbum", this.state);
   };
 
@@ -38,15 +39,15 @@ class AddAlbum extends React.Component {
       Release_date: "",
       Category: "",
       Description: "",
-      Rotation: "0"
+      Rotation: false
     });
   }
 
   render() {
     return (
-      <div className="insert-album">
+      <div className="insert-query">
         <h1>Add Album:</h1>
-        <form onSubmit={this.handleSubmit} className="insert-album__fields">
+        <form onSubmit={this.handleSubmit} className="insert-query__fields">
           <label>
             <input
               name="Album_title"
