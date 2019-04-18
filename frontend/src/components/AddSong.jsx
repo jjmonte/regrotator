@@ -29,9 +29,11 @@ class AddSong extends React.Component {
   }
 
   addAlbum = currentState => {
-    this.state.Explicit = + this.state.Explicit;
-    this.state.Request = + this.state.Request;
-    this.state.Try = + this.state.Try;
+    this.setState({
+      Explicit: + this.state.Explicit,
+      Request: + this.state.Request,
+      Try: + this.state.Tru
+    });
     console.log(currentState);
     axios.post("http://localhost:3001/api/addAlbum", this.state);
   };

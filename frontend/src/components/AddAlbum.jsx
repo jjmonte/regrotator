@@ -25,7 +25,8 @@ class AddAlbum extends React.Component {
   }
   
   addAlbum = (currentState) => {
-    this.state.Rotation = + this.state.Rotation;
+    
+    this.setState({Rotation: + this.state.Rotation});
     axios.post("http://localhost:3001/api/addAlbum", this.state);
   };
 

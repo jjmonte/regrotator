@@ -50,7 +50,7 @@ class Modal extends Component {
               type="button"
               className="close-button"
               onClick={this.props.closeRequest}
-            >❌</button>
+            ><span role="img" aria-label="close">❌</span></button>
           <div className="modal-content">
             {this.props.children}
           </div>
