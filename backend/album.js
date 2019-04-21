@@ -35,6 +35,8 @@ module.exports = {
         var descript = desc;
         var rot_f = rotation;
 
+        var d = 1;
+
         //var riyl_a = new Array();
         //riyl_a = riyl.split(', ');
 
@@ -42,18 +44,18 @@ module.exports = {
         var insertAlbumValues = [album_id, a_title, catg, r_date, a_date, rot_f, descript, artist_name];
         console.log(insertAlbumValues);
 
-        while (d == 1) {
-            db.query('SELECT * FROM ALBUM WHERE Album_id = \'' + album_id + '\';', function(error, results) {
-                if (error) throw error;
-                if (results.length > 0) {
-                    if (result) {
-                        console.log("Duplicate ID found. Generating new ID.");
-                        album_id = "A" + Math.floor((Math.random() * 9999) + 1);
-                    }
-                    else (d++);
-                }
-            });
-        }
+        // while (d == 1) {
+        //     db.query('SELECT * FROM ALBUM WHERE Album_id = \'' + album_id + '\';', function(error, results) {
+        //         if (error) throw error;
+        //         if (results.length > 0) {
+        //             if (result) {
+        //                 console.log("Duplicate ID found. Generating new ID.");
+        //                 album_id = "A" + Math.floor((Math.random() * 9999) + 1);
+        //             }
+        //             else (d++);
+        //         }
+        //     });
+        // }
 
         db.query(insertAlbumQuery, insertAlbumValues, function (err, result) {
             if (err) throw err;

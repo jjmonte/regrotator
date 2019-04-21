@@ -28,21 +28,21 @@ class AddSong extends React.Component {
     this.setState({ [name]: value });
   }
 
-  addAlbum = currentState => {
+  addSong = currentState => {
     this.setState({
       Explicit: + this.state.Explicit,
       Request: + this.state.Request,
-      Try: + this.state.Tru
+      Try: + this.state.Try
     });
     console.log(currentState);
-    axios.post("http://localhost:3001/api/addAlbum", this.state);
+    axios.post("http://localhost:3001/api/addSong", this.state);
   };
 
   handleSubmit(event) {
-    alert("Album submitted");
+    alert("Song submitted");
     event.preventDefault();
     console.log(this.state);
-    this.addAlbum(this.state);
+    this.addSong(this.state);
     this.setState({
       Song_title: "",
       Artist: "",
