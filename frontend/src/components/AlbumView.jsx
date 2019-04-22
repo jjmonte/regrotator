@@ -1,5 +1,6 @@
 import React from "react";
 import Category from "./Category";
+import axios from "axios";
 
 class AlbumView extends React.Component {
   constructor(props) {
@@ -8,15 +9,13 @@ class AlbumView extends React.Component {
       data: [],
       intervalIsSet: false,
       sortType: "default",
-      query: "getAlbums",
       genre: ""
     };
+    this.handleChange = this.handleChange.bind(this);
     this.changeSortType = this.changeSortType.bind(this);
+    this.changeQuery = this.changeQuery.bind(this);
   }
-  changeSortType(event) {
-    const sortType = event.target.name;
-    this.setState({ sortType: sortType });
-  }
+
   componentDidMount() {
     this.getAlbums();
     if (!this.state.intervalIsSet) {
@@ -37,20 +36,28 @@ class AlbumView extends React.Component {
   }
 
   changeQuery() {
-    if (this.state.query === "getAlbums") {
+    console.log(this.state.genre);
+    if (this.state.genre === "") {
       this.getAlbums();
+      clearInterval(this.state.intervalIsSet);
       let interval = setInterval(this.getAlbums, 10000);
       this.setState({
         intervalIsSet: interval
       });
     }
-    if (this.state.query === "getGenre") {
+    else {
       this.getGenre();
+      clearInterval(this.state.intervalIsSet);
       let interval = setInterval(this.getGenre, 10000);
       this.setState({
         intervalIsSet: interval
       });
     }
+  }
+  changeSortType(event) {
+    const sortType = event.target.name;
+    this.setState({ sortType: sortType });
+
   }
   getAlbums = () => {
     fetch("http://localhost:3001/api/getAlbums")
@@ -61,9 +68,10 @@ class AlbumView extends React.Component {
         })
       );
   };
+
   getGenre = () => {
     axios
-      .get("http://localhost:3001/api/getGenres", {
+      .get("http://localhost:3001/api/getAlbumsByGenre", {
         params: {
           genre: this.state.genre
         }
@@ -74,6 +82,18 @@ class AlbumView extends React.Component {
         })
       );
   };
+
+  handleChange(event) {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    this.setState({ [name]: value }, () => {
+        this.changeQuery();
+    console.log(this.state);
+    });
+
+  }
+
   render() {
     const { data } = this.state;
     const categoryH = [];
@@ -125,6 +145,18 @@ class AlbumView extends React.Component {
           <button onClick={this.changeSortType} name="notRotation">
             Out of rotation
           </button>
+          <br />
+          <label>
+            {" "}
+            Genre:{" "}
+            <input
+              name="genre"
+              placeholder="Genre"
+              type="text"
+              value={this.state.genre}
+              onChange={this.handleChange}
+            />
+          </label>
         </div>
         <Category type="H" albumList={categoryH} />
         <Category type="M" albumList={categoryM} />

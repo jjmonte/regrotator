@@ -33,7 +33,8 @@ router.get("/getAlbumsByGenre", (req, res) => {
     db.query("USE rotation", function (error) {
         if (error) throw error;        
     });
-    const Genre  = req.query.Genre;
+    const Genre  = req.query.genre;
+    console.log(Genre);
     let genreLookupQuery =  "SELECT ALBUM.* FROM ALBUM, ARTIST, ALBUM_OWNERSHIP " + 
                             "WHERE ALBUM.Album_id = ALBUM_OWNERSHIP.Album_id " +
                             "AND ARTIST.Artist_id = ALBUM_OWNERSHIP.Artist_id " +
