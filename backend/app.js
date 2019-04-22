@@ -34,7 +34,7 @@ router.get("/getSongs", (req, res) => {
     });
     
     const Album_ID  = req.query.Album_ID;
-    let songLookupQuery = "SELECT * FROM SONG WHERE SONG.Album_id = ?";
+    let songLookupQuery = "SELECT * FROM SONG WHERE SONG.Album_id = ? ORDER BY Track_num ASC";
 
     db.query(songLookupQuery, Album_ID,  function (error, results) {
         if (error) throw error;
