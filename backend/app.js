@@ -27,8 +27,29 @@ router.get("/getAlbums", (req, res) => {
     });
 });
 
+router.get("/getAlbumsByGenre", (req, res) => {
+    console.log("fetching albums");
+
+    db.query("USE rotation", function (error) {
+        if (error) throw error;        
+    });
+    const Genre  = req.query.Genre;
+    let genreLookupQuery =  "SELECT ALBUM.* FROM ALBUM, ARTIST, ALBUM_OWNERSHIP " + 
+                            "WHERE ALBUM.Album_id = ALBUM_OWNERSHIP.Album_id " +
+                            "AND ARTIST.Artist_id = ALBUM_OWNERSHIP.Artist_id " +
+                            "AND ARTIST.Genre = ?";
+    db.query(genreLookupQuery, Genre, function (error, results) {
+        if (error) throw error;
+        return res.json({
+            success: true,
+            data: results
+        });
+    });
+});
+
 router.get("/getSongs", (req, res) => {
     console.log("fetching songs");
+
     db.query("USE rotation", function (error) {
         if (error) throw error;
     });
@@ -44,6 +65,7 @@ router.get("/getSongs", (req, res) => {
         });
     });
 });
+
 //THINGS 2 ADD: all of the variables to the const, 
 router.post("/addAlbum", (req, res) => {
     const {
