@@ -20,13 +20,12 @@ class AddAlbum extends React.Component {
   handleChange(event) {
     const target = event.target;
     const name = target.name;
-    const value = target.type === "checkbox" ? + target.checked : target.value;
+    const value = target.type === "checkbox" ? +target.checked : target.value;
     this.setState({ [name]: value });
   }
-  
-  addAlbum = (currentState) => {
-    
-    this.setState({Rotation: + this.state.Rotation});
+
+  addAlbum = currentState => {
+    this.setState({ Rotation: +this.state.Rotation });
     axios.post("http://localhost:3001/api/addAlbum", this.state);
   };
 
@@ -49,7 +48,7 @@ class AddAlbum extends React.Component {
       <div className="insert-query">
         <h1>Add Album:</h1>
         <form onSubmit={this.handleSubmit} className="insert-query__fields">
-          <label>
+          <div className="add-album-form">
             <input
               name="Album_title"
               placeholder="Album name"
@@ -83,11 +82,17 @@ class AddAlbum extends React.Component {
               name="Description"
               placeholder="Description"
               type="text"
-              style={{ width: "500px" }}
+              style={{
+                width: "586px",
+                height: "46px",
+                wordWrap: "break-word",
+                wordBreak: "break-all"
+              }}
               value={this.state.Description}
               onChange={this.handleChange}
             />
-            <label>
+            <br />
+            <label style={{ paddingTop: "10px" }}>
               {" "}
               In rotation?{" "}
               <input
@@ -97,10 +102,12 @@ class AddAlbum extends React.Component {
                 onChange={this.handleChange}
               />
             </label>
-          </label>
-          <button type="submit" value="Submit">
-            Add Album
-          </button>
+            <div style={{ textAlign: "center" }}>
+              <button type="submit" value="Submit">
+                Add Album
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     );

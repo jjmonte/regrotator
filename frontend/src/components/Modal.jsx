@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-
 class Modal extends Component {
   constructor(props) {
     super(props);
@@ -46,14 +45,16 @@ class Modal extends Component {
     return (
       <div className="overlay">
         <div className="modal-container" ref={node => (this.modal = node)}>
-            <button
-              type="button"
-              className="close-button"
-              onClick={this.props.closeRequest}
-            ><span role="img" aria-label="close">❌</span></button>
-          <div className="modal-content">
-            {this.props.children}
-          </div>
+          <button
+            type="button"
+            className="close-button"
+            onClick={this.props.closeRequest}
+          >
+            <span role="img" aria-label="close">
+              🗙
+            </span>
+          </button>
+          <div className="modal-content">{this.props.children}</div>
         </div>
       </div>
     );

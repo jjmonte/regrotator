@@ -8,8 +8,8 @@ class SongList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        data: [],
-        intervalIsSet: false
+      data: [],
+      intervalIsSet: false
     };
   }
 
@@ -44,24 +44,27 @@ class SongList extends React.Component {
           data: res.data.data
         })
       );
-}
-
+  };
 
   render() {
-        const { data } = this.state;
-        const songList = [];
-        data.forEach(song => {
-            songList.push(
-              <div className="song" key={song.Song_id}>
-                <p className="song__descriptor__emoji">{song.Track_num}</p>
-                <p className="song__descriptor__emoji">{song.Try_flag ? "⭐" : null}</p>
-                <p className="song__descriptor">{song.Song_title}</p>
-                <p className="song__descriptor">{song.Artist}</p>
-                <p className="song__descriptor__emoji">{song.Exp_flag ? "🅴" : null}</p>
-                <p className="song__descriptor">{secondsToMinutes(song.Length)}</p>
-              </div>
-            );
-        });
+    const { data } = this.state;
+    const songList = [];
+    data.forEach(song => {
+      songList.push(
+        <div className="song" key={song.Song_id}>
+          <p className="song__descriptor__emoji">{song.Track_num}</p>
+          <p className="song__descriptor__emoji">
+            {song.Try_flag ? "★" : null}
+          </p>
+          <p className="song__descriptor">{song.Song_title}</p>
+          <p className="song__descriptor">{song.Artist}</p>
+          <p className="song__descriptor__emoji">
+            {song.Exp_flag ? "🅴" : null}
+          </p>
+          <p className="song__descriptor">{secondsToMinutes(song.Length)}</p>
+        </div>
+      );
+    });
     return (
       <React.Fragment>
         <div className="song-list">

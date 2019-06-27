@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 import AddAlbum from "./components/AddAlbum";
 
@@ -8,11 +8,11 @@ class App extends Component {
     return (
       <div className="page">
         <center>
-          <h1>Reg Rotator</h1>
-          <h2>By Team Sigma</h2>
+          <h1>RegRotator</h1>
         </center>
         <AddAlbum />
         <AlbumView />
+        <p id="signature">Developed by Victor Perez and J. Montesano.</p>
       </div>
     );
   }

@@ -44,8 +44,7 @@ class AlbumView extends React.Component {
       this.setState({
         intervalIsSet: interval
       });
-    }
-    else {
+    } else {
       this.getGenre();
       clearInterval(this.state.intervalIsSet);
       let interval = setInterval(this.getGenre, 10000);
@@ -57,7 +56,6 @@ class AlbumView extends React.Component {
   changeSortType(event) {
     const sortType = event.target.name;
     this.setState({ sortType: sortType });
-
   }
   getAlbums = () => {
     fetch("http://localhost:3001/api/getAlbums")
@@ -88,10 +86,9 @@ class AlbumView extends React.Component {
     const name = target.name;
     const value = target.value;
     this.setState({ [name]: value }, () => {
-        this.changeQuery();
-    console.log(this.state);
+      this.changeQuery();
+      console.log(this.state);
     });
-
   }
 
   render() {
@@ -109,12 +106,13 @@ class AlbumView extends React.Component {
       if (
         this.state.sortType === "default" ||
         ((this.state.sortType === "rotation" &&
-          (album.Rotation_flag === 1 || album.Rotation_flag === "✅")) ||
+          // (album.Rotation_flag === 1 || album.Rotation_flag === "✅")) ||
+          (album.Rotation_flag === 1 || album.Rotation_flag === "✓")) ||
           (this.state.sortType === "notRotation" &&
             (album.Rotation_flag === 0 || album.Rotation_flag === " ")))
       ) {
         if (album.Rotation_flag === 1) {
-          album.Rotation_flag = "✅";
+          album.Rotation_flag = "✓";
         } else if (album.Rotation_flag === 0) {
           album.Rotation_flag = " ";
         }
@@ -133,30 +131,45 @@ class AlbumView extends React.Component {
     });
     return (
       <div className="album-list">
-        <h1>Albums:</h1>
+        <h1>Albums</h1>
         <div className="filter-selector">
-          Filter:{" "}
-          <button onClick={this.changeSortType} name="default">
+          Filter: <br />
+          <button
+            className="filter-button"
+            onClick={this.changeSortType}
+            name="default"
+          >
             Default
           </button>
-          <button onClick={this.changeSortType} name="rotation">
+          <button
+            className="filter-button"
+            onClick={this.changeSortType}
+            name="rotation"
+          >
             In rotation
           </button>
-          <button onClick={this.changeSortType} name="notRotation">
+          <button
+            className="filter-button"
+            onClick={this.changeSortType}
+            name="notRotation"
+          >
             Out of rotation
           </button>
+          <input
+            style={{ width: "128px" }}
+            className="genre-filter"
+            name="genre"
+            placeholder="Genre"
+            type="text"
+            value={this.state.genre}
+            onChange={this.handleChange}
+          />
           <br />
-          <label>
+          {/* <label>
             {" "}
             Genre:{" "}
-            <input
-              name="genre"
-              placeholder="Genre"
-              type="text"
-              value={this.state.genre}
-              onChange={this.handleChange}
-            />
-          </label>
+            
+          </label> */}
         </div>
         <Category type="H" albumList={categoryH} />
         <Category type="M" albumList={categoryM} />

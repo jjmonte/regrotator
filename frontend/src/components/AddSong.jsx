@@ -30,9 +30,9 @@ class AddSong extends React.Component {
 
   addSong = currentState => {
     this.setState({
-      Explicit: + this.state.Explicit,
-      Request: + this.state.Request,
-      Try: + this.state.Try
+      Explicit: +this.state.Explicit,
+      Request: +this.state.Request,
+      Try: +this.state.Try
     });
     console.log(currentState);
     axios.post("http://localhost:3001/api/addSong", this.state);
@@ -60,13 +60,14 @@ class AddSong extends React.Component {
     return (
       <div className="insert-query">
         <h1>Add Song:</h1>
-        <h3>{this.props.title}</h3>
+        <h3 style={{ textAlign: "center" }}>{this.props.title}</h3>
         <h4>{this.props.artist}</h4>
         <form onSubmit={this.handleSubmit} className="insert-query__fields">
           <label>
             <input
               name="Song_title"
               placeholder="Song title"
+              style={{ width: "128px" }}
               type="text"
               value={this.state.Song_title}
               onChange={this.handleChange}
@@ -74,14 +75,15 @@ class AddSong extends React.Component {
             <input
               name="Artist"
               placeholder="Artist"
+              style={{ width: "128px" }}
               type="text"
               value={this.state.Artist}
               onChange={this.handleChange}
             />
             <input
               name="Minutes"
-              placeholder="Minutes"
-              style={{ width: "60px" }}
+              placeholder="Min"
+              style={{ width: "47.5px" }}
               type="text"
               value={this.state.Minutes}
               onChange={this.handleChange}
@@ -89,8 +91,8 @@ class AddSong extends React.Component {
             :{" "}
             <input
               name="Seconds"
-              placeholder="Seconds"
-              style={{ width: "60px" }}
+              placeholder="Sec"
+              style={{ width: "47.5px" }}
               type="text"
               value={this.state.Seconds}
               onChange={this.handleChange}
@@ -99,14 +101,14 @@ class AddSong extends React.Component {
               name="Track_num"
               placeholder="Track #"
               type="text"
-              style={{ width: "50px" }}
+              style={{ width: "52.75px" }}
               value={this.state.Track_num}
               onChange={this.handleChange}
             />
             <input
               name="X_D"
               placeholder="X/D?"
-              style={{ width: "50px" }}
+              style={{ width: "52.75px" }}
               type="text"
               value={this.state.X_D}
               onChange={this.handleChange}
@@ -114,7 +116,7 @@ class AddSong extends React.Component {
             <br />
             <label>
               {" "}
-              Try track?{" "}
+              Try?{" "}
               <input
                 name="Try"
                 type="checkbox"
@@ -133,7 +135,11 @@ class AddSong extends React.Component {
               />
             </label>
           </label>
-          <button type="submit" value="Submit">
+          <button
+            style={{ margin: "20px 50px 10px 50px" }}
+            type="submit"
+            value="Submit"
+          >
             Add
           </button>
         </form>
