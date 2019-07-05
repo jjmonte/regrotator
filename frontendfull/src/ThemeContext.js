@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import { ThemeProvider as EmotionThemeProvider } from "emotion-theming";
 import theme from "./theme.js";
 
@@ -12,22 +12,22 @@ import theme from "./theme.js";
  * A: Nope, themes are availible by using props.theme.{whatever}, from any child component of the application 
  */
 
-const ThemeContext = React.createContext({
+const ThemeContext = createContext({
   dark: false,
   toggle: () => { }
 });
 
-const useTheme = () => React.useContext(ThemeContext);
+const useTheme = () => useContext(ThemeContext);
 
 const useEffectChangeMode = () => {
-  const [themeState, setThemeState] = React.useState({
+  const [themeState, setThemeState] = useState({
     dark: false,
     hasThemeMounted: false
   });
-  React.useEffect(() => {
+  useEffect(() => {
     const isDark = localStorage.getItem("dark") === "true";
     setThemeState({ ...themeState, dark: isDark, hasThemeMounted: true });
-  }, []);
+  }, [themeState]);
 
   return [themeState, setThemeState];
 };
