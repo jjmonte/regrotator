@@ -26,6 +26,23 @@ router.get("/getAlbums", (req, res) => {
         });
     });
 });
+router.get("/getAlbumsByCategory", (req, res) => {
+  console.log("fetching albums");
+
+  db.query("USE rotation", function(error) {
+    if (error) throw error;
+  });
+  const reqCategory = req.query.reqCategory;
+  console.log(reqCategory);
+  let categoryLookupQuery = "SELECT ALBUM.* FROM ALBUM WHERE ALBUM.Category = ?";
+  db.query(categoryLookupQuery, reqCategory, function(error, results) {
+    if (error) throw error;
+    return res.json({
+      success: true,
+      data: results
+    });
+  });
+});
 
 router.get("/getAlbumsByGenre", (req, res) => {
     console.log("fetching albums");
@@ -35,7 +52,7 @@ router.get("/getAlbumsByGenre", (req, res) => {
     });
     const Genre  = req.query.genre;
     console.log(Genre);
-    let genreLookupQuery =  "SELECT ALBUM.* FROM ALBUM, ARTIST, ALBUM_OWNERSHIP " + 
+    let genreLookupQuery =  "SELECT ALBUM * FROM ALBUM, ARTIST, ALBUM_OWNERSHIP " + 
                             "WHERE ALBUM.Album_id = ALBUM_OWNERSHIP.Album_id " +
                             "AND ARTIST.Artist_id = ALBUM_OWNERSHIP.Artist_id " +
                             "AND ARTIST.Genre = ?";
