@@ -21,6 +21,9 @@ const SortButton = styled.button`
     margin-left: 4em;
     width: 10%;
     text-align: left;
+    &:hover {
+        cursor: pointer;
+    }
 `; 
 
 function SortBar(props) {
