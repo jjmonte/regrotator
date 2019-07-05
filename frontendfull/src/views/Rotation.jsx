@@ -1,16 +1,16 @@
 import React, {useContext} from "react";
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+
 
 // import Category from "../components/Category"
 import { AlbumContext } from "../contextComponents/AlbumContext"
-import logoPNG from "../resources/regrotatorlogo.png"
+import FilterToolbar from "../components/FilterToolbar"
 
-const RotationWrapper = styled.div`
+const MainWrapper = styled.div`
     display: flex;  
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+
     background-color: white;
     height: 100%;
     width: 78%;
@@ -31,18 +31,33 @@ const NavElement = styled.div`
         position: absolute;
     }
 `;
+const AlbumList = styled.ul`
+    overflow: scroll;
+    height: 86%;
+    width: 97%;
+    padding-left: 40px;
+    padding-top: 20px;
+
+`;
+const AlbumItem = styled.li`
+    font-size: 2.5em;
+    margin: 15px 0;
+    font-weight: bolder;
+
+`;
 function Rotation(props) {
     const [albums, setAlbums] = useContext(AlbumContext);
     return (
         <React.Fragment>
             <NavElement><span>ROTATION</span></NavElement>
-            <RotationWrapper>
-                <ul>
+            <MainWrapper>
+                <FilterToolbar />
+                <AlbumList>
                     {albums.map(album => (
-                        <li>{album.Artist} - {album.Album_title}</li>
+                        <AlbumItem>{album.Artist.toUpperCase()} - {album.Album_title.toUpperCase()}</AlbumItem>
                     ))}
-                </ul>
-            </RotationWrapper>
+                </AlbumList>
+            </MainWrapper>
         </React.Fragment>
 
     );
