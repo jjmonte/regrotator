@@ -11,13 +11,17 @@ const special = "#F28D8D";          //desaturated red
 const themeLight = {
   backgroundColor: primaryBase,
   color: primaryAccent,  
-  highlightColor: special
+  highlightColor: special,
+  bwPrimary: white,
+  bwSecondary: black
 };
 
 const themeDark = {
   backgroundColor: secondaryBase,
   color: secondaryAccent,
-  highlightColor: special
+  highlightColor: primaryAccent,
+  bwPrimary: black,
+  bwSecondary: white
 };
 
 const theme = mode => (mode === "dark" ? themeDark : themeLight);

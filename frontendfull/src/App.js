@@ -29,6 +29,7 @@ const App = () => {
           </AlbumProvider>
           <Route path="/playlists" exact />
           <Route path="/about"  />
+          <Route path="/:artist/:album" exact/>
         </Switch>
       </MainWrapper>
     </Router>
