@@ -4,8 +4,8 @@ import styled from "@emotion/styled";
 import Navigation from "./components/Navigation";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-//Views
-import Rotation from "./views/Rotation";
+//Pages
+import Rotation from "./pages/Rotation";
 import { AlbumProvider } from "./contextComponents/AlbumContext"
 const MainWrapper = styled.div`
   background-color: hotpink; /* Visual error checking */
