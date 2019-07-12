@@ -105,14 +105,14 @@ function Rotation(props) {
                         if (album.Artist === "Björk"){
                             return (
                             <AlbumItem className="björk" key={album.Album_id}>
-                                <Link to={`${album.Artist.replace(/\s+/g, '-').toLowerCase()}/${album.Album_id}-${album.Album_title.replace(/\s+/g, '-').toLowerCase()}/`}>
+                                <Link to={`/${album.Artist.replace(/\s+/g, '-').toLowerCase()}/${album.Album_id}-${album.Album_title.replace(/\s+/g, '-').toLowerCase()}/`}>
                                     {album.Artist.toUpperCase()} - {album.Album_title.toUpperCase()}
                                 </Link>
                             </AlbumItem>);
                         } else 
                         return (
                             <AlbumItem key={album.Album_id}>
-                                <Link to={`${album.Artist.replace(/\s+/g, '-').toLowerCase()}/${album.Album_id}-${album.Album_title.replace(/\s+/g, '-').toLowerCase()}/`}>
+                                <Link to={`/${album.Artist.replace(/\s+/g, '-').toLowerCase()}/${album.Album_id}-${album.Album_title.replace(/\s+/g, '-').toLowerCase()}/`}>
                                     {album.Artist.toUpperCase()} - {album.Album_title.toUpperCase()}
                                 </Link>
                             </AlbumItem>);

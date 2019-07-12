@@ -12,7 +12,7 @@ const SortBarWrapper = styled.div`
     background-color: ${props => props.theme.color};
     height: 62%;
     width: 100%;
-     position: relative;
+    position: relative;
 `;
 const SortButton = styled.button`
     font-size: 20px;    
