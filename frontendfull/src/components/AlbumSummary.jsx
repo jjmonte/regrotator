@@ -8,9 +8,9 @@ const SummaryWrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: inherits;
-    border-right: 4mm ridge ${props => props.theme.color};
-    height: 91%;
+    background-color: inherit;
+    border-right: 3mm ridge ${props => props.theme.color};
+    height: 100%;
     width: 30%;
     position: relative;
 `;

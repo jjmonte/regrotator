@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import BreadCrumb from "../components/Breadcrumb"
 import AlbumSummary from "../components/AlbumSummary"
+import SongList from "../components/SongList"
 
 const MainWrapper = styled.div`
     display: flex;  
@@ -13,6 +14,14 @@ const MainWrapper = styled.div`
     background-color: ${props => props.theme.bwPrimary};
     height: 100%;
     width: 85%;
+`;
+const SecondaryWrapper = styled.div`
+    display: flex;  
+    flex-direction: row;
+    justify-content: flex-start;
+    height: 91%;
+    width: 100%;
+    color: ${props => props.theme.bwSecondary};
 `;
 function Album({ match }) {
     const [albumTitle, setAlbumTitle] = useState('');
@@ -49,8 +58,10 @@ function Album({ match }) {
     return (
         <MainWrapper>
             <BreadCrumb artist={match.params.artist} album={match.params.album} />
-            <AlbumSummary artist={artist} album={albumTitle} description={description} />
-            {/* <AlbumTracks />  */}
+            <SecondaryWrapper>
+                <AlbumSummary artist={artist} album={albumTitle} description={description} />
+                <SongList albumID={pageAlbumId} /> 
+            </SecondaryWrapper>
         </MainWrapper>
     );
 }
