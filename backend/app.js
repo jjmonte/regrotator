@@ -26,6 +26,23 @@ router.get("/getAlbums", (req, res) => {
         });
     });
 });
+
+router.get("/getSingleAlbum", (req, res) => {
+  db.query("USE rotation", function(error) {
+    if (error) throw error;
+  });
+  const albumId = req.query.Album_ID;
+  console.log("fetching album " + albumId);
+  let albumLookupQuery = "SELECT * FROM ALBUM WHERE ALBUM.Album_id = ?";
+  db.query(albumLookupQuery, albumId, function(error, results) {
+    if (error) throw error;
+    return res.json({
+      success: true,
+      data: results
+    });
+  });
+});
+
 router.get("/getAlbumsByCategory", (req, res) => {
   console.log("fetching albums");
 
