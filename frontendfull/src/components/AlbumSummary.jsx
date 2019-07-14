@@ -1,5 +1,6 @@
 import React from "react";
 import styled from '@emotion/styled';
+import ContentLoader from "react-content-loader"
 
 import albumCover from "../resources/placeholdercover.jpeg"
 
@@ -18,7 +19,7 @@ const AlbumCover = styled.img`
     width: 60%;
     margin: 10px;
     margin-top: 10%;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 `;
 const AlbumTitle = styled.h1`
     text-align: center;
@@ -48,13 +49,37 @@ function AlbumSummary(props) {
 
     return (
         <SummaryWrapper>
-            <AlbumCover src={albumCover} />
-            <AlbumTitle>{props.album}</AlbumTitle>
-            <ArtistName>{props.artist}</ArtistName>
-            <Description>{props.description}</Description>
-            <Dates>Released: {parsedReleaseDate.toDateString().substring(4, 15)} • Added: {parsedAddDate.toDateString().substring(4, 15)}</Dates>
+            {props.artist === '' ?
+            (<ContentLoader
+                height={600}
+                width={400}
+                speed={2}
+                primaryColor="#f3f3f3"
+                secondaryColor="#ecebeb"
+            >
+
+                <rect x="80" y="50" rx="5" ry="5" width="240" height="240" />
+                <rect x="110" y="300" rx="4" ry="4" width="185" height="24" />
+                <rect x="120" y="335" rx="4" ry="4" width="165" height="25" />
+                <rect x="90" y="380" rx="4" ry="4" width="225" height="100" />
+                <rect x="90" y="500" rx="4" ry="4" width="225" height="15" />
+
+            </ContentLoader>)
+            :
+            (<React.Fragment>
+                <AlbumCover src={albumCover} />
+                <AlbumTitle>{props.album}</AlbumTitle>
+                <ArtistName>{props.artist}</ArtistName>
+                <Description>{props.description}</Description>
+                <Dates>Released: {parsedReleaseDate.toDateString().substring(4, 15)} • Added: {parsedAddDate.toDateString().substring(4, 15)}</Dates>
+            </React.Fragment>)}
         </SummaryWrapper>
     );
 }
+
+
+
+
+
 
 export default AlbumSummary;

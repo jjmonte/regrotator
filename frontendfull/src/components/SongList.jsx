@@ -102,7 +102,7 @@ function SongList(props) {
     return (
         <ListWrapper>
             <InfoBar>
-                {props.rotation ? <p><FontAwesomeIcon icon={faCompactDisc} size="lg" /> In Rotation</p> : <p><FontAwesomeIcon icon={faArchive} size="lg" /> Archived</p>  }
+                {props.rotation ? <p><FontAwesomeIcon icon={faCompactDisc} /> In Rotation</p> : <p><FontAwesomeIcon icon={faArchive} /> Archived</p>  }
                 <p>{props.category}</p>    
             </InfoBar>
             <SongListElement>

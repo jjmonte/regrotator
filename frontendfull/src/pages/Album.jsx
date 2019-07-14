@@ -54,6 +54,7 @@ function Album({ match }) {
     
 
     return (
+        <React.StrictMode>
         <MainWrapper>
             <BreadCrumb artist={match.params.artist} album={match.params.album} />
             <SecondaryWrapper>
@@ -61,6 +62,7 @@ function Album({ match }) {
                 <SongList albumID={pageAlbumId} rotation={rotationFlag} category={category}/> 
             </SecondaryWrapper>
         </MainWrapper>
+        </React.StrictMode>
     );
 }
 export default Album;
