@@ -59,8 +59,8 @@ function Album({ match }) {
         <MainWrapper>
             <BreadCrumb artist={match.params.artist} album={match.params.album} />
             <SecondaryWrapper>
-                <AlbumSummary artist={artist} album={albumTitle} description={description} />
-                <SongList albumID={pageAlbumId} /> 
+                <AlbumSummary artist={artist} album={albumTitle} description={description} released={releaseDate} added={addDate} />
+                <SongList albumID={pageAlbumId} rotation={rotationFlag} category={category}/> 
             </SecondaryWrapper>
         </MainWrapper>
     );

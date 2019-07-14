@@ -26,8 +26,8 @@ const NavLinks = styled.ul`
     justify-content: flex-start;
 `;
 const NavLinkItem = styled.li`
-    font-size: 3.5em;
-    padding: .35em .5em;
+    font-size: 3.4em;
+    padding: .35em 0;
     text-align: center;
     
     color: ${props => props.theme.color};

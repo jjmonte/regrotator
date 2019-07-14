@@ -3,29 +3,56 @@ import axios from "axios";
 import styled from '@emotion/styled';
 import { css } from '@emotion/core'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCompactDisc } from '@fortawesome/free-solid-svg-icons'
+import { faArchive } from '@fortawesome/free-solid-svg-icons'
+
 const ListWrapper = styled.div`
     background-color: inherit;
     height: 100%;
-    width: 70%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify content: flex-start;
 `;
+const InfoBar = styled.div`
+    font-size: 2.5em;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 40px;
+`;
+
 const SongListElement = styled.ul`
     display: flex;  
     flex-direction: column;
     justify-content: flex-start;
     width: 100;
-    margin: 0 auto;
-    border-bottom: 3mm ridge ${props => props.theme.color};
+    border-bottom: 1px solid ${props => props.theme.color};
 `;
-const explicitStriker = props => props.explicit ? css`text-decoration: line-through;` : css`  text-decoration: none;`;
+const explicitStriker = props => props.explicit ? css`&:after {
+    position: absolute;
+    left: 2%;
+    top: 45%;
+    height: 3px;
+    background: black;
+    content: "";
+    width: 93%;
+    display: block;
+    }` : css``;
 
 const Song = styled.li`
     ${explicitStriker};
+    position: relative;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-evenly;
     &:first-child{
-        border-bottom: 3mm ridge ${props => props.theme.color};"
+        border-bottom: 1px solid  ${props => props.theme.color};
+        border-top: 1px solid  ${props => props.theme.color};
     }
 `;
 const tryBolder = props => props.try ? css`font-weight: bolder; text-shadow: 1px 1px goldenrod;` : css`font-weight: normal;`;
@@ -37,9 +64,14 @@ const SongDescriptor = styled.p`
     padding-bottom: 0;
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 400px;
-    padding-left: 25px
-
+    width: 42.5%;
+    padding-left: 25px;
+    &:first-child{
+        width: 5%;
+    }
+    &:last-child{
+        width: 10%;
+    }
 `;
 
 function SongList(props) {
@@ -50,7 +82,6 @@ function SongList(props) {
                 Album_ID: props.albumID
             }
         });
-        console.log(res.data.data);
         setSongs(res.data.data);
 
     }
@@ -59,12 +90,12 @@ function SongList(props) {
         fetchData();
 
     }, []);
-    console.log();
+
     const songsAsElements = [];
     songs.map(song =>{
         songsAsElements.push(
             <Song key={song.Song_id} explicit={song.Exp_flag}>
-                <SongDescriptor>{song.Track_num}</SongDescriptor>
+                <SongDescriptor>{song.Track_num < 10 ? "0" : ""}{song.Track_num}</SongDescriptor>
                 <SongDescriptor try={song.Try_flag}>{song.Song_title}</SongDescriptor>
                 <SongDescriptor>{song.Artist}</SongDescriptor>
                 <SongDescriptor>{secondsToMinutes(song.Length)}</SongDescriptor>
@@ -73,6 +104,10 @@ function SongList(props) {
     })
     return (
         <ListWrapper>
+            <InfoBar>
+                {props.rotation ? <p><FontAwesomeIcon icon={faCompactDisc} size="lg" /> In Rotation</p> : <p><FontAwesomeIcon icon={faArchive} size="lg" /> Archived</p>  }
+                <p>{props.category}</p>    
+            </InfoBar>
             <SongListElement>
                 <Song>
                     <SongDescriptor>#</SongDescriptor>
