@@ -39,7 +39,6 @@ function Album({ match }) {
                 Album_ID: pageAlbumId
             }
         });
-        console.log(res.data.data[0]);
         setAlbumTitle(res.data.data[0].Album_title);
         setArtist(res.data.data[0].Artist);
         setCategory(res.data.data[0].Category);
@@ -47,14 +46,14 @@ function Album({ match }) {
         setAddDate(res.data.data[0].Add_date);
         setReleaseDate(res.data.data[0].Release_date);
         setRotationFlag(res.data.data[0].Rotation_flag);
-
+        document.title = `RegRotator: ${res.data.data[0].Album_title} by ${res.data.data[0].Artist}`; 
     }
 
     useEffect(() => {
         fetchData();
-
     }, []);
-    console.log();
+    
+
     return (
         <MainWrapper>
             <BreadCrumb artist={match.params.artist} album={match.params.album} />

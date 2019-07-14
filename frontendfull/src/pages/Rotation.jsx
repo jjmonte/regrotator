@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext, useEffect } from "react";
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
@@ -94,6 +94,10 @@ const AlbumItem = styled.li`
 `;
 function Rotation(props) {
     const [albums, setAlbums] = useContext(AlbumContext);
+    useEffect(() => {
+        document.title = `RegRotator: Current Rotation`; 
+    });
+
 
     return (
         <React.Fragment>
