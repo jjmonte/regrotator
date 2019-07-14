@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
 
 import BreadCrumb from "../components/Breadcrumb"
 import AlbumSummary from "../components/AlbumSummary"
@@ -33,25 +32,25 @@ function Album({ match }) {
     const [rotationFlag, setRotationFlag] = useState(0);
     
     const pageAlbumId = match.params.album.substring(0, match.params.album.indexOf('-'));
-    async function fetchData() {
-        const res = await axios('http://localhost:3001/api/getSingleAlbum',{
-            params: {
-                Album_ID: pageAlbumId
-            }
-        });
-        setAlbumTitle(res.data.data[0].Album_title);
-        setArtist(res.data.data[0].Artist);
-        setCategory(res.data.data[0].Category);
-        setDescription(res.data.data[0].Description);
-        setAddDate(res.data.data[0].Add_date);
-        setReleaseDate(res.data.data[0].Release_date);
-        setRotationFlag(res.data.data[0].Rotation_flag);
-        document.title = `RegRotator: ${res.data.data[0].Album_title} by ${res.data.data[0].Artist}`; 
-    }
 
     useEffect(() => {
+        async function fetchData() {
+            const res = await axios('http://localhost:3001/api/getSingleAlbum', {
+                params: {
+                    Album_ID: pageAlbumId
+                }
+            });
+            setAlbumTitle(res.data.data[0].Album_title);
+            setArtist(res.data.data[0].Artist);
+            setCategory(res.data.data[0].Category);
+            setDescription(res.data.data[0].Description);
+            setAddDate(res.data.data[0].Add_date);
+            setReleaseDate(res.data.data[0].Release_date);
+            setRotationFlag(res.data.data[0].Rotation_flag);
+            document.title = `RegRotator: ${res.data.data[0].Album_title} by ${res.data.data[0].Artist}`;
+        }
         fetchData();
-    }, []);
+    }, [pageAlbumId]);
     
 
     return (

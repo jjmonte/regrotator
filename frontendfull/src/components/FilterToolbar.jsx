@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
 
 import SortBar from "./SortBar";
 import CategoryFilter from "./CategoryFilter";

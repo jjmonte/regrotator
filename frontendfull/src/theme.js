@@ -1,6 +1,6 @@
 const white = "#FFFFFF";
 const black = "#161617";
-const gray = "#F8F8F9";
+// const gray = "#F8F8F9";
 
 const primaryBase = "#F2D0C4";      //tan red
 const secondaryBase = "#A68780";    //light brown   

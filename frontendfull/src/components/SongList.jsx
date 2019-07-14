@@ -76,32 +76,29 @@ const SongDescriptor = styled.p`
 
 function SongList(props) {
     const [songs, setSongs] = useState([]);
-    async function fetchData() {
-        const res = await axios('http://localhost:3001/api/getSongs', {
-            params: {
-                Album_ID: props.albumID
-            }
-        });
-        setSongs(res.data.data);
 
-    }
 
     useEffect(() => {
+        async function fetchData() {
+            const res = await axios('http://localhost:3001/api/getSongs', {
+                params: {
+                    Album_ID: props.albumID
+                }
+            });
+            setSongs(res.data.data);
+
+        }
         fetchData();
+    }, [props.albumID]);
 
-    }, []);
-
-    const songsAsElements = [];
-    songs.map(song =>{
-        songsAsElements.push(
-            <Song key={song.Song_id} explicit={song.Exp_flag}>
-                <SongDescriptor>{song.Track_num < 10 ? "0" : ""}{song.Track_num}</SongDescriptor>
-                <SongDescriptor try={song.Try_flag}>{song.Song_title}</SongDescriptor>
-                <SongDescriptor>{song.Artist}</SongDescriptor>
-                <SongDescriptor>{secondsToMinutes(song.Length)}</SongDescriptor>
-            </Song>
-        );
-    })
+    const songsAsElements = songs.map(song =>
+        <Song key={song.Song_id} explicit={song.Exp_flag}>
+            <SongDescriptor>{song.Track_num < 10 ? "0" : ""}{song.Track_num}</SongDescriptor>
+            <SongDescriptor try={song.Try_flag}>{song.Song_title}</SongDescriptor>
+            <SongDescriptor>{song.Artist}</SongDescriptor>
+            <SongDescriptor>{secondsToMinutes(song.Length)}</SongDescriptor>
+        </Song>
+    );
     return (
         <ListWrapper>
             <InfoBar>
