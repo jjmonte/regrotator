@@ -8,7 +8,7 @@ const BreadCrumbWrapper = styled.div`
     flex-direction: row;
     justify-content: flex-start;
     background-color: ${props => props.theme.color};
-    height: 9%;
+    height: 9.4%;
     width: 100%;
     position: relative;
 `;
@@ -16,7 +16,7 @@ const CrumbList = styled.ul`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    padding: 2%;
+    padding: 2.3%;
     padding-left: 50px;
     font-size: 1.5em;
     text-align: center;

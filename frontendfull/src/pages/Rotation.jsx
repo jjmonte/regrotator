@@ -103,14 +103,14 @@ const Category = styled.p`
     text-align: center;
 `;
 
-function Rotation() {
+function Rotation(props) {
     const [albums, setAlbums] = useContext(AlbumContext);
     const [category, setCategory] = useState("ALL");
     const [sortType, setSortType] = useState("category");
     const [sortOrder, setSortOrder] = useState("descending");
 
     const rotationList = albums
-        // .filter(album => album.Rotation_flag === 1)   //Not enough sample data, so disabling for now
+        // .filter(album => album.Rotation_flag === props.rotationFlag)   //Not enough sample data, so disabling for now
         .filter(album => category === 'ALL' || category === album.Category);
 
     switch(sortType) {
@@ -135,14 +135,16 @@ function Rotation() {
     }
 
     useEffect(() => {
-        document.title = `RegRotator: Current Rotation`;
+        document.title = `RegRotator: ${props.pageTitle}`;
     });
 
     const mappedRotationList = rotationList.map(album => {
+        console.log((album.Artist + "" + album.Album_title).length > 45);
         return (
             <AlbumItem className={album.Artist === "Björk" ? "björk" : "not_björk"} key={album.Album_id}>
                 <Link to={`/${album.Artist.replace(/\s+/g, '-').toLowerCase()}/${album.Album_id}-${album.Album_title.replace(/\s+/g, '-').toLowerCase()}/`}>
-                    {album.Artist.toUpperCase()} - {album.Album_title.toUpperCase()}
+                    {/* This only handles overly long album titles, not artist names. Need to add a case for artists like TWIABP */}
+                    {(album.Artist + "" + album.Album_title).length > 45 ? `${album.Artist.toUpperCase()} - ${album.Album_title.toUpperCase().substring(0, 25)}...` : `${album.Artist.toUpperCase()} - ${album.Album_title.toUpperCase()}`}
                 </Link>
                 <Category>{album.Category}</Category>
             </AlbumItem>);
@@ -151,7 +153,7 @@ function Rotation() {
     console.log(rotationList);
     return (
         <React.Fragment>
-            <NavElement><span>ROTATION</span></NavElement>
+            <NavElement><span>{props.navElementTitle}</span></NavElement>
             <MainWrapper>
                 <SortBar sortType={sortType} setSortType={setSortType} sortOrder={sortOrder} setSortOrder={setSortOrder} useAllCategories={category === "ALL"} />
                 <CategoryFilter category={category} setCategory={setCategory} />

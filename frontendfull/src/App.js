@@ -26,8 +26,30 @@ const App = () => {
         <Switch>
           <Route path="/" exact />
           <AlbumProvider>
-            <Route path="/rotation" exact component={Rotation} />
+            <Route
+              path="/rotation"
+              exact
+              render={props => (
+                <Rotation
+                  {...props}
+                  rotationFlag={1}
+                  pageTitle={"Current Rotation"}
+                  navElementTitle={"ROTATION"}
+                />
+              )}
+            />
             <Route path="/:artist/:album" exact component={Album} />
+            <Route
+              path="/archive"
+              render={props => (
+                <Rotation
+                  {...props}
+                  rotationFlag={0}
+                  pageTitle={"Archived Albums"}
+                  navElementTitle={"ARCHIVE"}
+                />
+              )}
+            />
           </AlbumProvider>
           <Route path="/playlists" exact />
           <Route path="/about" />

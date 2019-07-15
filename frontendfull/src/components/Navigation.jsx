@@ -30,7 +30,7 @@ const NavLinkItem = styled.li`
     padding: .35em 0;
     text-align: center;
     
-    color: ${props => props.theme.color};
+    color: ${props => props.theme.bwSecondary};
     &:hover {
         color: ${props => props.theme.highlightColor};
         transition: .2s;
