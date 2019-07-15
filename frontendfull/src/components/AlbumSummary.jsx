@@ -54,8 +54,8 @@ function AlbumSummary(props) {
                 height={600}
                 width={400}
                 speed={2}
-                primaryColor="#f3f3f3"
-                secondaryColor="#ecebeb"
+                primaryColor="#F28D8D"
+                secondaryColor="#BF212E"
             >
 
                 <rect x="80" y="50" rx="5" ry="5" width="240" height="240" />
