@@ -16,7 +16,7 @@ function FilterToolbar(props) {
     return (
         <ToolbarWrapper>
             <SortBar />
-            <CategoryFilter/>
+            <CategoryFilter setCategoryState={props.setCategoryState} />
         </ToolbarWrapper>
 
     );

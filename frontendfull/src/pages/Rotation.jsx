@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
@@ -41,6 +41,7 @@ const AlbumList = styled.ul`
 
 `;
 //Please don't murder me jade
+//Or do? i dunno, don't let me tell you how to live your life
 const AlbumItem = styled.li`
     font-size: 2.5em;
     margin: 15px 0;
@@ -92,33 +93,37 @@ const AlbumItem = styled.li`
         100%{color: orange;}
     }
 `;
+const Category = styled.p`
+    float: right;
+    position: relative;
+    width: 40px;
+    margin-right: 50px;
+    right: -40px;
+    text-align: center;
+`;
+
 function Rotation(props) {
     const [albums, setAlbums] = useContext(AlbumContext);
+    const [filterCategory, setFilterCategory] = useState("");
+    
     useEffect(() => {
         document.title = `RegRotator: Current Rotation`; 
     });
 
-
+    console.log(filterCategory);
     return (
         <React.Fragment>
             <NavElement><span>ROTATION</span></NavElement>
             <MainWrapper>
-                <FilterToolbar />
+                <FilterToolbar setCategoryState={setFilterCategory}/>
                 <AlbumList>
-                    {albums.map(album => {
-                        if (album.Artist === "Björk"){
-                            return (
-                            <AlbumItem className="björk" key={album.Album_id}>
-                                <Link to={`/${album.Artist.replace(/\s+/g, '-').toLowerCase()}/${album.Album_id}-${album.Album_title.replace(/\s+/g, '-').toLowerCase()}/`}>
-                                    {album.Artist.toUpperCase()} - {album.Album_title.toUpperCase()}
-                                </Link>
-                            </AlbumItem>);
-                        } else 
+                    {albums.filter(album => filterCategory === 'ALL' || filterCategory === album.Category).map(album => {
                         return (
-                            <AlbumItem key={album.Album_id}>
+                            <AlbumItem className={album.Artist === "Björk" ? "björk" : "not_björk"}key={album.Album_id}>
                                 <Link to={`/${album.Artist.replace(/\s+/g, '-').toLowerCase()}/${album.Album_id}-${album.Album_title.replace(/\s+/g, '-').toLowerCase()}/`}>
                                     {album.Artist.toUpperCase()} - {album.Album_title.toUpperCase()}
                                 </Link>
+                                <Category>{album.Category}</Category>
                             </AlbumItem>);
                     })}
                 </AlbumList>

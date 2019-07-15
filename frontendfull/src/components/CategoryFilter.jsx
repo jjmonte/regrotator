@@ -34,9 +34,10 @@ const CategoryButton = styled.li`
 `;
 function CategoryFilter(props) {
     const [category, setCategory] = useState("ALL");
-
+    props.setCategoryState(category);
     function handleClick(e) {
         setCategory(e);
+        props.setCategoryState(category);
     }
     return (    
         <CategoryFilterWrapper>
