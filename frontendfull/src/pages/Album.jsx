@@ -52,7 +52,6 @@ function Album({ match }) {
         fetchData();
     }, [pageAlbumId]);
     
-
     return (
         <React.StrictMode>
         <MainWrapper>

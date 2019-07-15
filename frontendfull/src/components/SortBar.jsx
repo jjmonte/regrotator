@@ -25,10 +25,7 @@ const SortButton = styled.button`
     }
 `; 
 
-function SortBar(props) {
-    const [sortType, setSortType] = useState("album");
-    const [sortOrder, setSortOrder] = useState("descending");
-    
+function SortBar({ sortOrder, setSortOrder, sortType, setSortType, useAllCategories}) {
     const toggleSort = () => { sortOrder === "descending" ? setSortOrder("ascending") : setSortOrder("descending") }
     
     function handleClick(e){
@@ -38,11 +35,13 @@ function SortBar(props) {
             setSortType(e);
         }
     }
+    
     return (
         <SortBarWrapper>
             <SortButton onClick={() => handleClick("date")} >Date Played  <SortOrderButton selected={sortType === "date"} order={sortOrder} /></SortButton>
             <SortButton onClick={() => handleClick("album")} >Album A-Z   <SortOrderButton selected={sortType === "album"} order={sortOrder} /></SortButton>
             <SortButton onClick={() => handleClick("artist")} >Artist A-Z <SortOrderButton selected={sortType === "artist"} order={sortOrder} /></SortButton>
+            {useAllCategories ? <SortButton onClick={() => handleClick("category")} >Category H-A <SortOrderButton selected={sortType === "category"} order={sortOrder} /></SortButton> : ""}       
         </SortBarWrapper>
     );
 }

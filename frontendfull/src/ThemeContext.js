@@ -10,6 +10,7 @@ import theme from "./theme.js";
  * 
  * Q: Do you need to import this as a context like normal?
  * A: Nope, themes are availible by using props.theme.{whatever}, from any child component of the application 
+ * 
  */
 
 const ThemeContext = createContext({

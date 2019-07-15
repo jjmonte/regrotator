@@ -2,9 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
-// import Category from "../components/Category"
 import { AlbumContext } from "../contextComponents/AlbumContext"
-import FilterToolbar from "../components/FilterToolbar"
+import SortBar from "../components/SortBar";
+import CategoryFilter from "../components/CategoryFilter";
 
 const MainWrapper = styled.div`
     display: flex;  
@@ -31,6 +31,14 @@ const NavElement = styled.div`
         position: absolute;
     }
 `;
+const FilterToolbar = styled.div`
+    display: flex;  
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 15%;
+    width: 100%;
+`;
+
 const AlbumList = styled.ul`
     overflow: scroll;
     height: 86%;
@@ -104,20 +112,39 @@ const Category = styled.p`
 
 function Rotation(props) {
     const [albums, setAlbums] = useContext(AlbumContext);
-    const [filterCategory, setFilterCategory] = useState("");
+    const [category, setCategory] = useState("ALL");
+    const [sortType, setSortType] = useState("category");
+    const [sortOrder, setSortOrder] = useState("descending");
     
     useEffect(() => {
         document.title = `RegRotator: Current Rotation`; 
     });
+    const rotationList = albums
+        // .filter(album => album.Rotation_flag === 1)   //Not enough sample data, so disabling for now
+        .filter(album => category === 'ALL' || category === album.Category);
 
-    console.log(filterCategory);
+    switch(sortType) {
+        case "artist":
+            console.log("sorting by Artist");
+            rotationList.sort(compareArtist);
+            break;
+        case "album":
+            console.log("sorting by Album_title");
+            rotationList.sort(compareAlbum);
+            break;
+        default:
+            console.log("whoopsiedaisy");
+    }
     return (
         <React.Fragment>
             <NavElement><span>ROTATION</span></NavElement>
             <MainWrapper>
-                <FilterToolbar setCategoryState={setFilterCategory}/>
+                <FilterToolbar>
+                    <SortBar sortType={sortType} setSortType={setSortType} sortOrder={sortOrder} setSortOrder={setSortOrder} useAllCategories={category === "ALL"} />
+                    <CategoryFilter category={category} setCategory={setCategory} />
+                </FilterToolbar>
                 <AlbumList>
-                    {albums.filter(album => filterCategory === 'ALL' || filterCategory === album.Category).map(album => {
+                    {rotationList.map(album => {
                         return (
                             <AlbumItem className={album.Artist === "Björk" ? "björk" : "not_björk"}key={album.Album_id}>
                                 <Link to={`/${album.Artist.replace(/\s+/g, '-').toLowerCase()}/${album.Album_id}-${album.Album_title.replace(/\s+/g, '-').toLowerCase()}/`}>
@@ -131,5 +158,23 @@ function Rotation(props) {
         </React.Fragment>
 
     );
+}
+function compareArtist(a, b) {
+    if (a.Artist.toUpperCase() < b.Artist.toUpperCase())  {
+        return -1;
+    }
+    if (a.Artist.toUpperCase() > b.Artist.toUpperCase()) {
+        return 1;
+    }
+    return 0;
+}
+function compareAlbum(a, b) {
+    if (a.Album_title.toUpperCase() < b.Album_title.toUpperCase()) {
+        return -1;
+    }
+    if (a.Album_title.toUpperCase() > b.Album_title.toUpperCase()) {
+        return 1;
+    }
+    return 0;
 }
 export default Rotation;

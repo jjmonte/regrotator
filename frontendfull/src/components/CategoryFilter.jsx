@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React from "react";
 import styled from '@emotion/styled';
 
 const CategoryFilterWrapper = styled.ul`
@@ -32,12 +32,10 @@ const CategoryButton = styled.li`
         cursor: pointer;
     }
 `;
-function CategoryFilter(props) {
-    const [category, setCategory] = useState("ALL");
-    props.setCategoryState(category);
+function CategoryFilter({category, setCategory}) {
+
     function handleClick(e) {
         setCategory(e);
-        props.setCategoryState(category);
     }
     return (    
         <CategoryFilterWrapper>
