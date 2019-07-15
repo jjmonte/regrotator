@@ -31,20 +31,13 @@ const NavElement = styled.div`
         position: absolute;
     }
 `;
-const FilterToolbar = styled.div`
-    display: flex;  
-    flex-direction: column;
-    justify-content: flex-start;
-    height: 15%;
-    width: 100%;
-`;
 
 const AlbumList = styled.ul`
-    overflow: scroll;
-    height: 86%;
+    overflow: auto;
+    height: 91%;
     width: 97%;
-    padding-left: 40px;
-    padding-top: 20px;
+    padding-left: 3%;
+    padding-top: 4%;
     background-color: ${props => props.theme.bwPrimary};
 
 `;
@@ -110,21 +103,18 @@ const Category = styled.p`
     text-align: center;
 `;
 
-function Rotation(props) {
+function Rotation() {
     const [albums, setAlbums] = useContext(AlbumContext);
     const [category, setCategory] = useState("ALL");
     const [sortType, setSortType] = useState("category");
     const [sortOrder, setSortOrder] = useState("descending");
-    
-    useEffect(() => {
-        document.title = `RegRotator: Current Rotation`; 
-    });
+
     const rotationList = albums
         // .filter(album => album.Rotation_flag === 1)   //Not enough sample data, so disabling for now
         .filter(album => category === 'ALL' || category === album.Category);
 
     switch(sortType) {
-        case "artist":
+        case "artist":  
             console.log("sorting by Artist");
             rotationList.sort(compareArtist);
             break;
@@ -132,33 +122,48 @@ function Rotation(props) {
             console.log("sorting by Album_title");
             rotationList.sort(compareAlbum);
             break;
+        case "category":
+            console.log("sorting by Category");
+            rotationList.sort(compareCategory);
+            break;
+        case "date":
+            console.log("sorting by Add_date");
+            rotationList.sort(compareDate);
+            break;
         default:
             console.log("whoopsiedaisy");
     }
+
+    useEffect(() => {
+        document.title = `RegRotator: Current Rotation`;
+    });
+
+    const mappedRotationList = rotationList.map(album => {
+        return (
+            <AlbumItem className={album.Artist === "Björk" ? "björk" : "not_björk"} key={album.Album_id}>
+                <Link to={`/${album.Artist.replace(/\s+/g, '-').toLowerCase()}/${album.Album_id}-${album.Album_title.replace(/\s+/g, '-').toLowerCase()}/`}>
+                    {album.Artist.toUpperCase()} - {album.Album_title.toUpperCase()}
+                </Link>
+                <Category>{album.Category}</Category>
+            </AlbumItem>);
+        });
+        
+    console.log(rotationList);
     return (
         <React.Fragment>
             <NavElement><span>ROTATION</span></NavElement>
             <MainWrapper>
-                <FilterToolbar>
-                    <SortBar sortType={sortType} setSortType={setSortType} sortOrder={sortOrder} setSortOrder={setSortOrder} useAllCategories={category === "ALL"} />
-                    <CategoryFilter category={category} setCategory={setCategory} />
-                </FilterToolbar>
-                <AlbumList>
-                    {rotationList.map(album => {
-                        return (
-                            <AlbumItem className={album.Artist === "Björk" ? "björk" : "not_björk"}key={album.Album_id}>
-                                <Link to={`/${album.Artist.replace(/\s+/g, '-').toLowerCase()}/${album.Album_id}-${album.Album_title.replace(/\s+/g, '-').toLowerCase()}/`}>
-                                    {album.Artist.toUpperCase()} - {album.Album_title.toUpperCase()}
-                                </Link>
-                                <Category>{album.Category}</Category>
-                            </AlbumItem>);
-                    })}
-                </AlbumList>
+                <SortBar sortType={sortType} setSortType={setSortType} sortOrder={sortOrder} setSortOrder={setSortOrder} useAllCategories={category === "ALL"} />
+                <CategoryFilter category={category} setCategory={setCategory} />
+                <AlbumList>{sortOrder === "ascending" ? mappedRotationList.reverse() : mappedRotationList}</AlbumList>
             </MainWrapper>
         </React.Fragment>
 
     );
 }
+//Helper functions for use in arrays.prototype.sort(compare function)
+//Should probably move helper functions like these into a seperate folder 
+//for readability, but I don't wanna !!
 function compareArtist(a, b) {
     if (a.Artist.toUpperCase() < b.Artist.toUpperCase())  {
         return -1;
@@ -177,4 +182,14 @@ function compareAlbum(a, b) {
     }
     return 0;
 }
+function compareDate(a, b) {
+    return a.Add_date - b.Add_date;
+}
+const CategoryOrdering = {}, sortDefaultOrder = ['H', 'M', 'L', 'A', ''];
+for (var i = 0; i < sortDefaultOrder.length; i++)
+    CategoryOrdering[sortDefaultOrder[i]] = i;
+function compareCategory(a, b) {
+    return (CategoryOrdering[a.Category] - CategoryOrdering[b.Category]) || a.Artist.localeCompare(b.Artist);
+}
+
 export default Rotation;

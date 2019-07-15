@@ -9,7 +9,7 @@ const SortBarWrapper = styled.div`
     flex-direction: row;
     justify-content: flex-start;
     background-color: ${props => props.theme.color};
-    height: 62%;
+    height: 10%;
     width: 100%;
     position: relative;
 `;
@@ -18,7 +18,7 @@ const SortButton = styled.button`
     color: white;
     position: relative;
     margin-left: 4em;
-    width: 10%;
+    width: 15%;
     text-align: left;
     &:hover {
         cursor: pointer;
@@ -27,7 +27,7 @@ const SortButton = styled.button`
 
 function SortBar({ sortOrder, setSortOrder, sortType, setSortType, useAllCategories}) {
     const toggleSort = () => { sortOrder === "descending" ? setSortOrder("ascending") : setSortOrder("descending") }
-    
+
     function handleClick(e){
         if (e === sortType) {
             toggleSort();
@@ -38,7 +38,7 @@ function SortBar({ sortOrder, setSortOrder, sortType, setSortType, useAllCategor
     
     return (
         <SortBarWrapper>
-            <SortButton onClick={() => handleClick("date")} >Date Played  <SortOrderButton selected={sortType === "date"} order={sortOrder} /></SortButton>
+            <SortButton onClick={() => handleClick("date")} >Date Added <SortOrderButton selected={sortType === "date"} order={sortOrder} /></SortButton>
             <SortButton onClick={() => handleClick("album")} >Album A-Z   <SortOrderButton selected={sortType === "album"} order={sortOrder} /></SortButton>
             <SortButton onClick={() => handleClick("artist")} >Artist A-Z <SortOrderButton selected={sortType === "artist"} order={sortOrder} /></SortButton>
             {useAllCategories ? <SortButton onClick={() => handleClick("category")} >Category H-A <SortOrderButton selected={sortType === "category"} order={sortOrder} /></SortButton> : ""}       

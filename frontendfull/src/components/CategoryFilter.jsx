@@ -5,17 +5,19 @@ const CategoryFilterWrapper = styled.ul`
     display: flex;  
     flex-direction: row;
     justify-content: flex-start;
-    height: 38%;
-    width: 97%;
-    padding-left: 25px;
+    height: 6%;
+    width: 25%;
     background-color: ${props => props.theme.bwPrimary};
+    position: absolute;
+    top: 9.4%;
+    left: 24%;
 
 `;
 const CategoryButton = styled.li`
     margin: 0 -5px;
     padding: 20px 20px;
     font-size: 1.5em;
-    width: 3%;
+    width: 20%;
     text-align: center;
     background: ${props => props.theme.highlightColor};
     border-bottom-left-radius: 6px;
