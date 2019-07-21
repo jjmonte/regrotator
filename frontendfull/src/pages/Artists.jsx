@@ -98,10 +98,17 @@ function Artists(props) {
         className={artist.Artist_name === 'Björk' ? 'björk' : 'not_björk'}
         key={artist.Artist_name}
       >
-        {artist.Artist_name.length > 45
-          ? `${artist.Artist_name.toUpperCase().substring(0, 25)}...`
-          : `${artist.Artist_name.toUpperCase()}`}
-        <ArtistInitial>{artist.Artist_name.substring(0, 1)}</ArtistInitial>
+        <Link
+          to={`/artists/${artist.Artist_id}-${artist.Artist_name.replace(
+            /\s+/g,
+            '-'
+          ).toLowerCase()}/`}
+        >
+          {artist.Artist_name.length > 45
+            ? `${artist.Artist_name.toUpperCase().substring(0, 25)}...`
+            : `${artist.Artist_name.toUpperCase()}`}
+          <ArtistInitial>{artist.Artist_name.substring(0, 1)}</ArtistInitial>
+        </Link>
       </AlbumItem>
     );
   });

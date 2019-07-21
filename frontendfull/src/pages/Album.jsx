@@ -55,7 +55,7 @@ function Album({ match }) {
   return (
     <React.StrictMode>
       <MainWrapper>
-        <BreadCrumb artist={match.params.artist} album={match.params.album} />
+        <BreadCrumb artist={match.params.artist} album={match.params.album} isAlbum={true} />
         <SecondaryWrapper>
           <AlbumSummary
             artist={artist}
@@ -64,7 +64,7 @@ function Album({ match }) {
             released={releaseDate}
             added={addDate}
           />
-          <SongList albumID={pageAlbumId} rotation={rotationFlag} category={category} />
+          <SongList albumID={pageAlbumId} rotation={rotationFlag} />
         </SecondaryWrapper>
       </MainWrapper>
     </React.StrictMode>
