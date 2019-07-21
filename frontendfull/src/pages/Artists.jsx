@@ -1,11 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 import AlbumItem from '../helpers/BjorkKeyframes';
 import ArtistSortBar from '../components/ArtistSortBar';
-import Album from './Album';
 
 const MainWrapper = styled.div`
   display: flex;

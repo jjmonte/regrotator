@@ -89,11 +89,10 @@ function Rotation(props) {
   });
 
   const mappedRotationList = rotationList.map(album => {
-    console.log((album.Artist + '' + album.Album_title).length > 45);
     return (
       <AlbumItem className={album.Artist === 'Björk' ? 'björk' : 'not_björk'} key={album.Album_id}>
         <Link
-          to={`/${album.Artist.replace(/\s+/g, '-').toLowerCase()}/${
+          to={`/artists/${album.Artist.replace(/\s+/g, '-').toLowerCase()}/${
             album.Album_id
           }-${album.Album_title.replace(/\s+/g, '-').toLowerCase()}/`}
         >

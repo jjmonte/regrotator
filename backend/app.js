@@ -54,7 +54,22 @@ router.get("/getSingleAlbum", (req, res) => {
     });
   });
 });
+router.get("/getSingleArtist", (req, res) => {
+  db.query("USE rotation", function(error) {
+    if (error) throw error;
+  });
+  const artistId = req.query.Artist_ID;
+  console.log("fetching artist " + artistId);
+  let artistLookupQuery = "SELECT * FROM ARTIST WHERE ARTIST.Artist_id = ?";
 
+  db.query(artistLookupQuery, artistId, function(error, results) {
+    if (error) throw error;
+    return res.json({
+      success: true,
+      data: results
+    });
+  });
+});
 router.get("/getAlbumsByCategory", (req, res) => {
   console.log("fetching albums");
 

@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import Rotation from './pages/Rotation';
 import Album from './pages/Album';
 import Artists from './pages/Artists';
+import ArtistInfo from './pages/ArtistInfo';
 //Context
 import { AlbumProvider } from './contextComponents/AlbumContext';
 
@@ -25,11 +26,13 @@ const App = () => {
       <MainWrapper>
         <Navigation />
         <Switch>
-          <Route path="/" exact />
+          <Route exact path="/" />
+          <Route path="/playlists" exact />
+          <Route path="/about" />
           <AlbumProvider>
             <Route
-              path="/rotation"
               exact
+              path="/rotation"
               render={props => (
                 <Rotation
                   {...props}
@@ -39,11 +42,10 @@ const App = () => {
                 />
               )}
             />
-            <Route path="/:artist/:album" exact component={Album} />
-            <Route path="/archive" exact component={Artists} />
+            <Route exact path="/archive" component={Artists} />
+            <Route exact path="/artists/:artist/" component={ArtistInfo} />
+            <Route exact path="/artists/:artist/:album" component={Album} />
           </AlbumProvider>
-          <Route path="/playlists" exact />
-          <Route path="/about" />
         </Switch>
       </MainWrapper>
     </Router>

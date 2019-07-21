@@ -37,11 +37,11 @@ function BreadCrumb(props) {
         </CrumbItem>
         &nbsp;>&nbsp;
         <CrumbItem>
-          <Link to={`/${props.artist}/`}>{props.artist.replace(/-+/g, ' ')}</Link>
+          <Link to={`/artists/${props.artist}/`}>{props.artist.replace(/-+/g, ' ')}</Link>
         </CrumbItem>
         &nbsp;>&nbsp;
         <CrumbItem>
-          <Link to={`/${props.artist}/${props.album}/`}>
+          <Link to={`/artists/${props.artist}/${props.album}/`}>
             {props.album.substring(props.album.indexOf('-') + 1).replace(/-+/g, ' ')}
           </Link>
         </CrumbItem>
