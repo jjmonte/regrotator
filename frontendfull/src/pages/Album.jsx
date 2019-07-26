@@ -64,7 +64,7 @@ function Album({ match }) {
             released={releaseDate}
             added={addDate}
           />
-          <SongList albumID={pageAlbumId} rotation={rotationFlag} />
+          <SongList albumID={pageAlbumId} rotation={rotationFlag} category={category} />
         </SecondaryWrapper>
       </MainWrapper>
     </React.StrictMode>

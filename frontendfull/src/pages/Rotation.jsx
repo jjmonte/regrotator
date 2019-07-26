@@ -86,7 +86,7 @@ function Rotation(props) {
         artist={album.Artist}
         album_id={album.Album_id}
         album_title={album.Album_title}
-        categry={album.Category}
+        category={album.Category}
       />
     );
   });

@@ -7,7 +7,7 @@ const SortBarWrapper = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   background-color: ${props => props.theme.color};
-  height: 10%;
+  height: 9.3%;
   width: 100%;
   position: relative;
   z-index: 1;

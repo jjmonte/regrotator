@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import AlbumItem from '../helpers/BjorkKeyframes';
 import ArtistSortBar from '../components/ArtistSortBar';
+import DiscographyList from '../components/DiscographyList';
 
 const MainWrapper = styled.div`
   display: flex;
@@ -18,8 +19,8 @@ const SubWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  height: 89.7%;
   width: 100%;
-  height: 100%;
 `;
 const NavElement = styled.div`
   margin: 0;
@@ -41,31 +42,45 @@ const NavElement = styled.div`
 
 const ArtistList = styled.ul`
   overflow: auto;
-  height: 100%;
+  height: 99%;
   width: 50%;
   padding-left: 3%;
   padding-top: 1%;
   background-color: ${props => props.theme.bwPrimary};
+  color: ${props => props.theme.bwSecondary};
   border-right 1px solid ${props => props.theme.color};
 `;
 const ArtistProfile = styled.ul`
   overflow: auto;
-  height: 100%;
+  height: 99%;
   width: 50%;
   padding-left: 3%;
   padding-top: 1%;
   background-color: ${props => props.theme.bwPrimary};
+  color: ${props => props.theme.bwSecondary};
 
   h1 {
     text-align: center;
     padding: 10px;
-    margin-top: 40px;
+    &:first-child {
+      margin-top: 40px;
+    }
   }
   h2 {
     text-align: left;
     width: 65%;
     margin: 0 auto;
     padding: 10px;
+  }
+`;
+const DiscogWrapper = styled.ul`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  h1 {
+    text-align: center;
+    font-size: 1.25em;
   }
 `;
 const ArtistInitial = styled.p`
@@ -131,10 +146,14 @@ function Artists(props) {
               <React.Fragment>
                 <h1>{selectedArtist.Artist_name}</h1>
                 <h2>
-                  Formed: {selectedArtist.Debut_year}, {selectedArtist.City}{' '}
+                  Formed: {selectedArtist.Debut_year}, {selectedArtist.City}
                   {selectedArtist.Country}
                 </h2>
                 <h2>Genres: {selectedArtist.Genre}</h2>
+                <h1>Discography</h1>
+                <DiscogWrapper>
+                  <DiscographyList artistID={selectedArtist.Artist_id} />
+                </DiscogWrapper>
               </React.Fragment>
             )}
           </ArtistProfile>
