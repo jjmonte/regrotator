@@ -96,9 +96,7 @@ function ArtistInfo({ match }) {
   const discogAsElements = discography.map(album => (
     <AlbumContainer>
       <Link
-        to={`/artists/${pageArtistId}-${name.replace(/\s+/g, '-').toLowerCase()}/${
-          album.Album_id
-        }-${album.Album_title.replace(/\s+/g, '-').toLowerCase()}/`}
+        to={`/album/${album.Album_id}-${album.Album_title.replace(/\s+/g, '-').toLowerCase()}/`}
       >
         <AlbumCover src={albumCover} />
         <h1>{album.Album_title}</h1>
@@ -108,7 +106,7 @@ function ArtistInfo({ match }) {
   return (
     <React.StrictMode>
       <MainWrapper>
-        <BreadCrumb artist={match.params.artist} album={null} isAlbum={false} />
+        <BreadCrumb artist={match.params.artist} album={null} artistID={pageArtistId} />
         <ArtistName>{name}</ArtistName>
         <DiscographyList>
           <ArtistProfile>

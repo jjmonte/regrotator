@@ -43,8 +43,8 @@ const App = () => {
               )}
             />
             <Route exact path="/archive" component={Artists} />
-            <Route exact path="/artists/:artist/" component={ArtistInfo} />
-            <Route exact path="/artists/:artist/:album" component={Album} />
+            <Route exact path="/artist/:artist/" component={ArtistInfo} />
+            <Route exact path="/album/:album" component={Album} />
           </AlbumProvider>
         </Switch>
       </MainWrapper>

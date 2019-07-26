@@ -130,6 +130,23 @@ router.get("/getAlbumNamesByArtist", (req, res) => {
     });
   });
 });
+router.get("/getArtistIdFromAlbum", (req, res) => {
+  db.query("USE rotation", function(error) {
+    if (error) throw error;
+  });
+  const albumId = req.query.Album_ID;
+  console.log("fetching artist id" + albumId);
+
+  let artistIdLookupQuery =
+    "SELECT Artist_id FROM ALBUM_OWNERSHIP WHERE ALBUM_OWNERSHIP.Album_id = ?";
+  db.query(artistIdLookupQuery, albumId, function(error, results) {
+    if (error) throw error;
+    return res.json({
+      success: true,
+      data: results
+    });
+  });
+});
 router.get("/getSongs", (req, res) => {
   console.log("fetching songs");
 

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { AlbumContext } from '../contextComponents/AlbumContext';
 import SortBar from '../components/SortBar';
 import CategoryFilter from '../components/CategoryFilter';
-import AlbumItem from '../helpers/BjorkKeyframes';
+import AlbumLinkItem from '../components/AlbumLinkItem';
 
 const MainWrapper = styled.div`
   display: flex;
@@ -44,15 +44,6 @@ const AlbumList = styled.ul`
 //Please don't murder me jade
 //Or do? i dunno, don't let me tell you how to live your life
 
-const Category = styled.p`
-  float: right;
-  position: relative;
-  width: 40px;
-  margin-right: 50px;
-  right: -40px;
-  text-align: center;
-`;
-
 function Rotation(props) {
   const [albums, setAlbums] = useContext(AlbumContext);
   const [category, setCategory] = useState('ALL');
@@ -90,22 +81,13 @@ function Rotation(props) {
 
   const mappedRotationList = rotationList.map(album => {
     return (
-      <AlbumItem className={album.Artist === 'Björk' ? 'björk' : 'not_björk'} key={album.Album_id}>
-        <Link
-          to={`/artists/${album.Artist.replace(/\s+/g, '-').toLowerCase()}/${
-            album.Album_id
-          }-${album.Album_title.replace(/\s+/g, '-').toLowerCase()}/`}
-        >
-          {/* This only handles overly long album titles, not artist names. Need to add a case for artists like TWIABP */}
-          {(album.Artist + '' + album.Album_title).length > 45
-            ? `${album.Artist.toUpperCase()} - ${album.Album_title.toUpperCase().substring(
-                0,
-                25
-              )}...`
-            : `${album.Artist.toUpperCase()} - ${album.Album_title.toUpperCase()}`}
-        </Link>
-        <Category>{album.Category}</Category>
-      </AlbumItem>
+      <AlbumLinkItem
+        key={album.Album_id}
+        artist={album.Artist}
+        album_id={album.Album_id}
+        album_title={album.Album_title}
+        categry={album.Category}
+      />
     );
   });
 

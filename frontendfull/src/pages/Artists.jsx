@@ -99,7 +99,7 @@ function Artists(props) {
         key={artist.Artist_name}
       >
         <Link
-          to={`/artists/${artist.Artist_id}-${artist.Artist_name.replace(
+          to={`/artist/${artist.Artist_id}-${artist.Artist_name.replace(
             /\s+/g,
             '-'
           ).toLowerCase()}/`}

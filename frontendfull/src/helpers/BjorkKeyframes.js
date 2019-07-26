@@ -7,6 +7,9 @@ const AlbumItem = styled.li`
   margin: 15px 0;
   font-weight: bolder;
   color: ${props => props.theme.bwSecondary};
+  &:hover {
+    text-shadow: 1px 1px 2px #000000;
+  }
   &.björk {
     text-shadow: 2px 2px 4px #000000;
     -webkit-animation: rainbow 5s infinite;

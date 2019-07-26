@@ -50,12 +50,12 @@ function Album({ match }) {
       document.title = `RegRotator: ${res.data.data[0].Album_title} by ${res.data.data[0].Artist}`;
     }
     fetchData();
-  }, [pageAlbumId]);
+  }, [match.params.album, pageAlbumId]);
 
   return (
     <React.StrictMode>
       <MainWrapper>
-        <BreadCrumb artist={match.params.artist} album={match.params.album} isAlbum={true} />
+        <BreadCrumb artist={artist} album={match.params.album} artistID={null} />
         <SecondaryWrapper>
           <AlbumSummary
             artist={artist}
