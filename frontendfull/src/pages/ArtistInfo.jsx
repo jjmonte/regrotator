@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 import BreadCrumb from '../components/Breadcrumb';
 import DiscographyList from '../components/DiscographyList';
@@ -44,7 +47,16 @@ const ArtistProfile = styled.li`
     margin: 10px 0;
   }
 `;
-
+const AddReleaseLink = styled.li`
+  height: 30%;
+  width: 10%;
+  margin: auto 0;
+  text-align: center;
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.19);
+  h2 {
+    margin-top: 10px;
+  }
+`;
 function ArtistInfo({ match }) {
   const [name, setName] = useState('');
   const [formedYear, setFormedYear] = useState('');
@@ -86,6 +98,19 @@ function ArtistInfo({ match }) {
             <h3>{genres}</h3>
           </ArtistProfile>
           <DiscographyList artistID={pageArtistId} />
+          <AddReleaseLink artistID={pageArtistId}>
+            <Link
+              to={{
+                pathname: '/add-release/',
+                state: {
+                  artistToLoad: pageArtistId
+                }
+              }}
+            >
+              <FontAwesomeIcon icon={faPlusCircle} size="4x" />
+              <h2>Add Release</h2>
+            </Link>
+          </AddReleaseLink>
         </ListWrapper>
       </MainWrapper>
     </React.StrictMode>

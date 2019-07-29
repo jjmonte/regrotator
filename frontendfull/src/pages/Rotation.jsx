@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
 
 import { AlbumContext } from '../contextComponents/AlbumContext';
 import SortBar from '../components/SortBar';

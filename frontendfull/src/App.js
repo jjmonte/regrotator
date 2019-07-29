@@ -7,6 +7,7 @@ import Rotation from './pages/Rotation';
 import Album from './pages/Album';
 import Artists from './pages/Artists';
 import ArtistInfo from './pages/ArtistInfo';
+import AddRelease from './pages/AddRelease';
 //Context
 import { AlbumProvider } from './contextComponents/AlbumContext';
 
@@ -29,6 +30,7 @@ const App = () => {
           <Route exact path="/" />
           <Route path="/playlists" exact />
           <Route path="/about" />
+          <Route path="/add-release/" component={AddRelease} />
           <AlbumProvider>
             <Route
               exact

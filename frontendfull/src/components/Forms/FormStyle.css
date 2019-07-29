@@ -1,0 +1,10 @@
+/* Using css instead of styled components in order to allow for ez styling */
+input {
+  width: 20%;
+  background: #fafafa;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.35);
+  border: 1px solid #305a72;
+  flex-grow: 1;
+}
