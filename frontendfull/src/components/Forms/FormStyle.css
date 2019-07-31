@@ -22,7 +22,7 @@ button .submit {
   max-width: 25%;
 }
 
-button:hover {
+button:hover .submit {
   border: 2px solid rosybrown;
   color: rosybrown;
   cursor: pointer;

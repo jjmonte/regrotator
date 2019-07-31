@@ -68,7 +68,7 @@ function Rotation(props) {
           useAllCategories={category === 'ALL'}
         />
         <CategoryFilter category={category} setCategory={setCategory} />
-        <SecondaryWrapperList needsTopSpace={true}>
+        <SecondaryWrapperList>
           {sortOrder === 'ascending' ? mappedRotationList.reverse() : mappedRotationList}
         </SecondaryWrapperList>
       </MainWrapper>

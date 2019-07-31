@@ -5,8 +5,17 @@ import styled from '@emotion/styled';
 const AlbumItem = styled.li`
   font-size: 2.5em;
   margin: 15px 0;
+  padding-left: 3%;
   font-weight: bolder;
   color: ${props => props.theme.bwSecondary};
+  &:first-of-type {
+    padding-top: 1%;
+    ${props =>
+      props.needsTopSpace &&
+      `
+    padding-top: 4%;
+`}
+  }
   &:hover {
     text-shadow: 1px 1px 2px #000000;
   }

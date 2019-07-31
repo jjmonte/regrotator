@@ -8,7 +8,7 @@ const Switcher = styled.button`
   border-radius: 4px;
   background-color: white;
   font-size: 20px;
-  pading: 5px;
+  padding: 5px;
   position: fixed;
   bottom: 50px;
 `;

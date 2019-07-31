@@ -1,42 +1,11 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-
+import { NavWrapper, Logo, NavLinks, NavLinkItem } from '../pages/PagesElements';
 import ThemeSwitcher from './ThemeSwitcher';
 
 import logoPNG from '../resources/regrotatorlogo.png';
 
-const NavWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: ${props => props.theme.backgroundColor};
-  height: 100%;
-  width: 15%;
-`;
-const Logo = styled.img`
-  width: 60%;
-  padding: 1em;
-  margin-top: 2em;
-`;
-const NavLinks = styled.ul`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-`;
-const NavLinkItem = styled.li`
-  font-size: 3.4em;
-  padding: 0.35em 0;
-  text-align: center;
-
-  color: ${props => props.theme.bwSecondary};
-  &:hover {
-    color: ${props => props.theme.highlightColor};
-    transition: 0.2s;
-  }
-`;
-function Navigation(props) {
+function Navigation() {
   return (
     <NavWrapper>
       <Logo src={logoPNG} alt="Home" />

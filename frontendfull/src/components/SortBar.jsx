@@ -1,20 +1,7 @@
 import React from 'react';
-import styled from '@emotion/styled';
-import { TopBarWrapper } from '../pages/PagesElements';
+import { TopBarWrapper, SortButton } from '../pages/PagesElements';
 
 import SortOrderButton from './SortOrderButton';
-
-const SortButton = styled.button`
-  font-size: 20px;
-  color: white;
-  position: relative;
-  margin-left: 4em;
-  width: 15%;
-  text-align: left;
-  &:hover {
-    cursor: pointer;
-  }
-`;
 
 function SortBar({ sortOrder, setSortOrder, sortType, setSortType, useAllCategories }) {
   const toggleSort = () => {

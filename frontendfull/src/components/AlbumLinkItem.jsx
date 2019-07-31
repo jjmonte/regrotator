@@ -6,7 +6,11 @@ import AlbumItem from '../helpers/BjorkKeyframes';
 
 function AlbumLinkItem({ artist, album_id, album_title, category }) {
   return (
-    <AlbumItem className={artist === 'Björk' ? 'björk' : 'not_björk'} key={album_id}>
+    <AlbumItem
+      className={artist === 'Björk' ? 'björk' : 'not_björk'}
+      key={album_id}
+      needsTopSpace={true}
+    >
       <Link to={`/album/${album_id}-${album_title.toLowerCase()}/`}>
         {artist === undefined
           ? `${album_title.toUpperCase()}`
