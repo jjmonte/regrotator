@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import ContentLoader from 'react-content-loader';
 
-import albumCover from '../resources/placeholdercover.jpeg';
+import albumCover from '../resources/placeholdercover-1.jpeg';
 
 const SummaryWrapper = styled.div`
   display: flex;
@@ -44,7 +44,7 @@ const Dates = styled.span`
   font-weight: bold;
 `;
 function AlbumSummary(props) {
-  var parsedReleaseDate = new Date(
+  let parsedReleaseDate = new Date(
     props.released.substring(0, 4),
     props.released.substring(5, 7),
     props.released.substring(8, 10),
@@ -52,7 +52,7 @@ function AlbumSummary(props) {
     0,
     0
   );
-  var parsedAddDate = new Date(
+  let parsedAddDate = new Date(
     props.added.substring(0, 4),
     props.added.substring(5, 7),
     props.added.substring(8, 10),

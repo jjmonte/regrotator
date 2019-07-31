@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
-import FormCompleted from './FormCompleted';
-import LoadArtistFormData from './LoadArtistFormData';
 import AddReleaseSearch from './AddReleaseSearch';
+import FormCompleted from './FormCompleted';
+
 import ArtistForm from './ArtistForm';
+
+import LoadAlbumFormData from './LoadAlbumFormData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-
 const SectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,36 +26,36 @@ const StepHeader = styled.h2`
   margin-top: 20px;
   border-bottom: 1px solid ${props => props.theme.bwSecondary};
 `;
-function AddArtistSection(props) {
+function AddAlbumSection(props) {
   const [step, setStep] = useState(0);
-  const [artistId, setArtistId] = useState(props.loadedArtistId);
+  const [albumId, setAlbumId] = useState(props.loadedAlbumId);
   return (
     <SectionWrapper>
-      <h1>Artist Information:</h1>
-      {artistId != null ? (
+      <h1>Album Information:</h1>
+      {albumId != null ? (
         <FormCompleted>
-          <LoadArtistFormData loadedID={props.loadedArtistId}></LoadArtistFormData>
+          <LoadAlbumFormData loadedID={props.loadedAlbumId}></LoadAlbumFormData>
         </FormCompleted>
       ) : (
         <React.Fragment>
           <StepHeader>
-            Step 1: Search For Artist
+            Step 1: Search For Album
             {step > 0 ? <FontAwesomeIcon icon={faCheck} /> : ''}
           </StepHeader>
           {step === 0 ? (
-            <AddReleaseSearch searchType="Artist" changeStep={setStep} loadId={setArtistId} />
+            <AddReleaseSearch searchType="Album" changeStep={setStep} loadId={setAlbumId} />
           ) : (
             ''
           )}
 
           <StepHeader>
-            Step 2: Add New Artist {step > 1 ? <FontAwesomeIcon icon={faCheck} /> : ''}
+            Step 2: Add New Album {step > 1 ? <FontAwesomeIcon icon={faCheck} /> : ''}
           </StepHeader>
-          {step === 1 ? <ArtistForm changeStep={setStep} loadId={setArtistId} /> : ''}
+          {step === 1 ? <ArtistForm changeStep={setStep} loadId={setAlbumId} /> : ''}
         </React.Fragment>
       )}
     </SectionWrapper>
   );
 }
 
-export default AddArtistSection;
+export default AddAlbumSection;

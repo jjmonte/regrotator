@@ -2,6 +2,7 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 import AddArtistSection from '../components/Forms/AddArtistSection';
+import AddAlbumSection from '../components/Forms/AddAlbumSection';
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -36,10 +37,16 @@ function Album(props) {
       </NavElement>
       <MainWrapper>
         <AddArtistSection
-          loadedID={props.location.state === undefined ? null : props.location.state.artistToLoad}
+          loadedArtistId={
+            props.location.state === undefined ? null : props.location.state.artistToLoad
+          }
         />
-        {/* <AlbumInfoForm />
-        <SongListForm /> */}
+        <AddAlbumSection
+          loadedAlbumId={
+            props.location.state === undefined ? null : props.location.state.albumToLoad
+          }
+        />
+        {/* <SongListForm /> */}
       </MainWrapper>
     </React.StrictMode>
   );

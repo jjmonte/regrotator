@@ -30,25 +30,6 @@ const CrumbItem = styled.li`
 `;
 
 function BreadCrumb(props) {
-  const [artistId, setArtistId] = useState('');
-
-  useEffect(() => {
-    async function fetchArtistId() {
-      const res = await axios('http://localhost:3001/api/getArtistIdFromAlbum', {
-        params: {
-          Album_ID: props.album.substring(0, props.album.indexOf('-'))
-        }
-      });
-      if (res.data.data[0] !== undefined) {
-        setArtistId(res.data.data[0].Artist_id);
-      } else {
-        setArtistId('b52');
-      }
-    }
-    if (props.artistID === null) fetchArtistId();
-    else setArtistId(props.artistID);
-  }, [props.album, props.artistID, props.isAlbum]);
-
   return (
     <BreadCrumbWrapper>
       <CrumbList>
@@ -57,17 +38,17 @@ function BreadCrumb(props) {
         </CrumbItem>
         &nbsp;>&nbsp;
         <CrumbItem>
-          {props.artistID != null ? (
+          {props.album === null ? (
             <Link to={`/artist/${props.artist}/`}>
               {props.artist.substring(props.artist.indexOf('-') + 1)}
             </Link>
           ) : (
-            <Link to={`/artist/${artistId}-${props.artist}/`}>
+            <Link to={`/artist/${props.artistID}-${props.artist}/`}>
               {props.artist.substring(props.artist.indexOf('-') + 1)}
             </Link>
           )}
         </CrumbItem>
-        {props.artistID === null ? (
+        {props.album !== null ? (
           <React.Fragment>
             &nbsp;>&nbsp;
             <CrumbItem>

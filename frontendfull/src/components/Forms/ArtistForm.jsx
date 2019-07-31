@@ -17,6 +17,7 @@ const Row = styled.span`
   height: 10%;
   justify-content: flex-start;
   align-items: baseline;
+  margin-bottom: 5px;
 `;
 const Tooltip = styled.div`
   background-color: ${props => props.theme.highlightColor};
@@ -31,7 +32,7 @@ const Tooltip = styled.div`
 
   }
 `;
-const ArtistForm = () => (
+const ArtistForm = props => (
   <FormContainer>
     <Formik
       initialValues={{
@@ -59,25 +60,32 @@ const ArtistForm = () => (
       }}
     >
       {({ isSubmitting }) => (
-        <Form>
-          <Row>
-            <h3>Artist name:</h3> <Field type="text" name="Artist_name" />
-            <h3>Debut/birth year:</h3>
-            <Field type="text" name="Debut_year" placeholder="MM/DD/YYYY" />
-            <ErrorMessage name="Debut_year" component={Tooltip} />
-          </Row>
-          <h3>Location:</h3>
-          <Row>
-            <Field type="text" name="City" placeholder="City" />
-            <Field type="text" name="State" placeholder="State/province/region" />
-            <Field type="text" name="Country" placeholder="Country" />
-          </Row>
-          <h3>Genre(s): </h3>
-          <Field type="text" name="Genre" />
-          <button type="submit" disabled={isSubmitting}>
-            Submit
-          </button>
-        </Form>
+        <React.Fragment>
+          <Form>
+            <Row>
+              <h3>Artist name:</h3> <Field type="text" name="Artist_name" />
+              <h3>Debut/birth year:</h3>
+              <Field type="text" name="Debut_year" placeholder="MM/DD/YYYY" />
+              <ErrorMessage name="Debut_year" component={Tooltip} />
+            </Row>
+            <h3>Location:</h3>
+            <Row>
+              <Field type="text" name="City" placeholder="City" />
+              <Field type="text" name="State" placeholder="State/province/region" />
+              <Field type="text" name="Country" placeholder="Country" />
+            </Row>
+            <Row>
+              <h3>Genre(s): </h3>
+              <Field type="text" name="Genre" />
+            </Row>
+            <Row>
+              <button onClick={() => props.changeStep(0)}> Previous Step</button>
+              <button type="submit" disabled={isSubmitting}>
+                Submit
+              </button>
+            </Row>
+          </Form>
+        </React.Fragment>
       )}
     </Formik>
   </FormContainer>

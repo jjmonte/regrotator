@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompactDisc } from '@fortawesome/free-solid-svg-icons';
 import { faArchive } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 const ListWrapper = styled.div`
   background-color: inherit;
@@ -86,10 +88,25 @@ const SongDescriptor = styled.p`
     width: 10%;
   }
 `;
+const AddSongsLink = styled.li`
+  margin: 50px;
+  text-align: center;
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.19);
 
+  h1 {
+    margin-bottom: 10px;
+  }
+  h2 {
+    margin-top: 10px;
+  }
+  svg:hover {
+    color: green;
+    transition: all 0.2s;
+  }
+`;
 function SongList(props) {
   const [songs, setSongs] = useState([]);
-
+  const [loadingStatus, setLoadingStatus] = useState('loading');
   useEffect(() => {
     async function fetchData() {
       const res = await axios('http://localhost:3001/api/getSongs', {
@@ -97,7 +114,13 @@ function SongList(props) {
           Album_ID: props.albumID
         }
       });
-      setSongs(res.data.data);
+
+      if (res.data.length > 0) {
+        setSongs(res.data.data);
+        setLoadingStatus('completed');
+      } else {
+        setLoadingStatus('failed');
+      }
     }
     fetchData();
   }, [props.albumID]);
@@ -126,7 +149,7 @@ function SongList(props) {
           </p>
         )}
         <p>{props.category}</p>
-      </InfoBar>
+      </InfoBar>{' '}
       <SongListElement>
         <Song>
           <SongDescriptor>#</SongDescriptor>
@@ -134,7 +157,25 @@ function SongList(props) {
           <SongDescriptor>Artist</SongDescriptor>
           <SongDescriptor>Time</SongDescriptor>
         </Song>
-        {songsAsElements}
+        {loadingStatus === 'completed' ? (
+          { songsAsElements }
+        ) : (
+          <Link
+            to={{
+              pathname: '/add-release/',
+              state: {
+                artistToLoad: props.artistID,
+                albumToLoad: props.albumID
+              }
+            }}
+          >
+            <AddSongsLink>
+              <h1>No songs found for this album.</h1>
+              <FontAwesomeIcon icon={faPlusCircle} size="4x" />
+              <h2>Add Songs</h2>
+            </AddSongsLink>
+          </Link>
+        )}
       </SongListElement>
     </ListWrapper>
   );

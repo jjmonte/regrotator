@@ -23,6 +23,7 @@ const SecondaryWrapper = styled.div`
   color: ${props => props.theme.bwSecondary};
 `;
 function Album({ match }) {
+  const [artistId, setArtistId] = useState('');
   const [albumTitle, setAlbumTitle] = useState('');
   const [artist, setArtist] = useState('');
   const [category, setCategory] = useState('');
@@ -34,7 +35,22 @@ function Album({ match }) {
   const pageAlbumId = match.params.album.substring(0, match.params.album.indexOf('-'));
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchArtistId() {
+      const res = await axios('http://localhost:3001/api/getArtistIdFromAlbum', {
+        params: {
+          Album_ID: pageAlbumId
+        }
+      });
+
+      if (res.data.data[0] !== undefined) {
+        setArtistId(res.data.data[0].Artist_id);
+        console.log(artistId);
+      } else {
+        setArtistId('b52');
+      }
+    }
+
+    async function fetchAlbumData() {
       const res = await axios('http://localhost:3001/api/getSingleAlbum', {
         params: {
           Album_ID: pageAlbumId
@@ -49,13 +65,14 @@ function Album({ match }) {
       setRotationFlag(res.data.data[0].Rotation_flag);
       document.title = `RegRotator: ${res.data.data[0].Album_title} by ${res.data.data[0].Artist}`;
     }
-    fetchData();
-  }, [match.params.album, pageAlbumId]);
+    fetchAlbumData();
+    fetchArtistId();
+  }, [artistId, match.params.album, pageAlbumId]);
 
   return (
     <React.StrictMode>
       <MainWrapper>
-        <BreadCrumb artist={artist} album={match.params.album} artistID={null} />
+        <BreadCrumb artist={artist} album={match.params.album} artistID={artistId} />
         <SecondaryWrapper>
           <AlbumSummary
             artist={artist}
@@ -64,7 +81,12 @@ function Album({ match }) {
             released={releaseDate}
             added={addDate}
           />
-          <SongList albumID={pageAlbumId} rotation={rotationFlag} category={category} />
+          <SongList
+            albumID={pageAlbumId}
+            artistID={artistId}
+            rotation={rotationFlag}
+            category={category}
+          />
         </SecondaryWrapper>
       </MainWrapper>
     </React.StrictMode>

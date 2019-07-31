@@ -7,4 +7,23 @@ input {
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.35);
   border: 1px solid #305a72;
   flex-grow: 1;
+  font-size: 1em;
+}
+button {
+  padding: 0.35em 1.2em;
+  margin: 5px;
+  border: 2px solid black;
+  border-radius: 2px;
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  transition: all 0.2s;
+  font-size: 1em;
+  max-width: 25%;
+}
+
+button:hover {
+  border: 2px solid rosybrown;
+  color: rosybrown;
+  cursor: pointer;
 }

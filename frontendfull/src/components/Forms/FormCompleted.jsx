@@ -5,7 +5,6 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const PanelWrapper = styled.div`
   background-color: ${props => props.theme.backgroundColor};
-  height: 25%;
   width: 90%;
   border-radius: 10px;
   border: 1px solid ${props => props.theme.highlightColor};

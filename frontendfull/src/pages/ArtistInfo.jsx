@@ -47,7 +47,7 @@ const ArtistProfile = styled.li`
     margin: 10px 0;
   }
 `;
-const AddReleaseLink = styled.li`
+const AddReleaseLink = styled.span`
   height: 30%;
   width: 10%;
   margin: auto 0;
@@ -55,6 +55,10 @@ const AddReleaseLink = styled.li`
   text-shadow: 0 10px 20px rgba(0, 0, 0, 0.19);
   h2 {
     margin-top: 10px;
+  }
+  svg:hover {
+    color: green;
+    transition: all 0.2s;
   }
 `;
 function ArtistInfo({ match }) {
@@ -98,7 +102,7 @@ function ArtistInfo({ match }) {
             <h3>{genres}</h3>
           </ArtistProfile>
           <DiscographyList artistID={pageArtistId} />
-          <AddReleaseLink artistID={pageArtistId}>
+          <AddReleaseLink>
             <Link
               to={{
                 pathname: '/add-release/',
