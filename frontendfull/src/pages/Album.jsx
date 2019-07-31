@@ -56,7 +56,7 @@ function Album({ match }) {
 
   return (
     <React.StrictMode>
-      <NavElement>
+      <NavElement color={'skyblue'}>
         <span>ALBUM INFO</span>
       </NavElement>
       <MainWrapper>

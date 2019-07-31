@@ -30,3 +30,47 @@ export const AlbumCover = styled.img`
   margin: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 `;
+//Magic number: font-size
+export const ArtistName = styled.h1`
+  font-size: 10vw;
+  font-weight: bolder;
+  margin: 50px 0;
+  width: 100%;
+`;
+export const ListWrapper = styled.ul`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 20px;
+  overflow: auto;
+  h1 {
+    text-align: center;
+  }
+`;
+export const ArtistProfile = styled.li`
+  height: 85%;
+  width: 15%;
+  margin: 0 10px;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  h1 {
+    margin: 10px 0;
+  }
+  h2 {
+    margin: 10px 0;
+  }
+`;
+export const AddReleaseLink = styled.span`
+  height: 30%;
+  width: 10%;
+  margin: auto 0;
+  text-align: center;
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.19);
+  h2 {
+    margin-top: 10px;
+  }
+  svg:hover {
+    color: green;
+    transition: all 0.2s;
+  }
+`;

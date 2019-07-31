@@ -23,7 +23,6 @@ export const NavLinkItem = styled.li`
   font-size: 3.4em;
   padding: 0.35em 0;
   text-align: center;
-
   color: ${props => props.theme.bwSecondary};
   &:hover {
     color: ${props => props.theme.highlightColor};
@@ -38,6 +37,11 @@ export const NavElement = styled.div`
   color: ${props => props.theme.bwPrimary};
   height: 100%;
   width: 7%;
+  ${props =>
+    props.color &&
+    `
+    background-color: ${props.color};
+`}
   span {
     font-size: 3em;
     line-height: normal;

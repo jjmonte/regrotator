@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { NavElement, MainWrapper } from './PagesElements';
+import { ArtistName, ListWrapper, ArtistProfile, AddReleaseLink } from './ArtistInfoElements';
 
 import BreadCrumb from '../components/Breadcrumb';
 import DiscographyList from '../components/DiscographyList';
@@ -10,50 +10,6 @@ import DiscographyList from '../components/DiscographyList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-//Magic number: font-size
-const ArtistName = styled.h1`
-  font-size: 10vw;
-  font-weight: bolder;
-  margin: 50px 0;
-  width: 100%;
-`;
-const ListWrapper = styled.ul`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  margin-left: 20px;
-  overflow: auto;
-  h1 {
-    text-align: center;
-  }
-`;
-const ArtistProfile = styled.li`
-  height: 85%;
-  width: 15%;
-  margin: 0 10px;
-  text-align: center;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  h1 {
-    margin: 10px 0;
-  }
-  h2 {
-    margin: 10px 0;
-  }
-`;
-const AddReleaseLink = styled.span`
-  height: 30%;
-  width: 10%;
-  margin: auto 0;
-  text-align: center;
-  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.19);
-  h2 {
-    margin-top: 10px;
-  }
-  svg:hover {
-    color: green;
-    transition: all 0.2s;
-  }
-`;
 function ArtistInfo({ match }) {
   const [name, setName] = useState('');
   const [formedYear, setFormedYear] = useState('');
@@ -81,7 +37,7 @@ function ArtistInfo({ match }) {
 
   return (
     <React.StrictMode>
-      <NavElement>
+      <NavElement color="DarkSeaGreen">
         <span>ARTIST INFO</span>
       </NavElement>
       <MainWrapper>
