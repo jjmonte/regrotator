@@ -1,17 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { TopBarWrapper } from '../pages/PagesElements';
+
 import SortOrderButton from './SortOrderButton';
 
-const SortBarWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  background-color: ${props => props.theme.color};
-  height: 10%;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-`;
 const SortButton = styled.button`
   font-size: 20px;
   color: white;
@@ -38,7 +30,7 @@ function SortBar({ sortOrder, setSortOrder, sortType, setSortType, useAllCategor
   }
 
   return (
-    <SortBarWrapper>
+    <TopBarWrapper>
       <SortButton onClick={() => handleClick('date')}>
         Date Added <SortOrderButton selected={sortType === 'date'} order={sortOrder} />
       </SortButton>
@@ -55,7 +47,7 @@ function SortBar({ sortOrder, setSortOrder, sortType, setSortType, useAllCategor
       ) : (
         ''
       )}
-    </SortBarWrapper>
+    </TopBarWrapper>
   );
 }
 

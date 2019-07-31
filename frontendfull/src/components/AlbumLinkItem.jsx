@@ -1,17 +1,8 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
+import { ListInitial } from '../pages/PagesElements';
 
 import AlbumItem from '../helpers/BjorkKeyframes';
-
-const Category = styled.p`
-  float: right;
-  position: relative;
-  width: 40px;
-  margin-right: 50px;
-  right: -40px;
-  text-align: center;
-`;
 
 function AlbumLinkItem({ artist, album_id, album_title, category }) {
   return (
@@ -23,7 +14,7 @@ function AlbumLinkItem({ artist, album_id, album_title, category }) {
           ? `${artist.toUpperCase()} - ${album_title.toUpperCase().substring(0, 25)}...`
           : `${artist.toUpperCase()} - ${album_title.toUpperCase()}`}
       </Link>
-      <Category>{category}</Category>
+      <ListInitial>{category}</ListInitial>
     </AlbumItem>
   );
 }

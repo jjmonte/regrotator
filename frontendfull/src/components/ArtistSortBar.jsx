@@ -1,17 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import SortOrderButton from './SortOrderButton';
+import { TopBarWrapper } from '../pages/PagesElements';
 
-const SortBarWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  background-color: ${props => props.theme.color};
-  height: 9.3%;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-`;
 const SortButton = styled.button`
   font-size: 20px;
   color: white;
@@ -34,11 +25,11 @@ function ArtistSortBar({ sortOrder, setSortOrder }) {
   }
 
   return (
-    <SortBarWrapper>
+    <TopBarWrapper>
       <SortButton onClick={() => handleClick('artist')}>
         Artist A-Z <SortOrderButton selected={true} order={sortOrder} />
       </SortButton>
-    </SortBarWrapper>
+    </TopBarWrapper>
   );
 }
 

@@ -9,7 +9,7 @@ input {
   flex-grow: 1;
   font-size: 1em;
 }
-button {
+button .submit {
   padding: 0.35em 1.2em;
   margin: 5px;
   border: 2px solid black;

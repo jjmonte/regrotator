@@ -1,100 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
-
 import axios from 'axios';
-import AlbumItem from '../helpers/BjorkKeyframes';
+import { NavElement, MainWrapper, SecondaryWrapperList } from './PagesElements';
+
+import ArtistLinkItem from '../components/ArtistLinkItem';
 import ArtistSortBar from '../components/ArtistSortBar';
-import DiscographyList from '../components/DiscographyList';
 
-const MainWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: ${props => props.theme.bwPrimary};
-  height: 100%;
-  width: 78%;
-`;
-const SubWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  height: 89.7%;
-  width: 100%;
-`;
-const NavElement = styled.div`
-  margin: 0;
-  text-align: center;
-  color: white;
-  background-color: ${props => props.theme.highlightColor};
-  color: ${props => props.theme.bwPrimary};
-  height: 100%;
-  width: 7%;
-  span {
-    font-size: 3em;
-    line-height: normal;
-    letter-spacing: 0.2em;
-    transform: translateX(-50%) translateY(-50%) rotate(-90deg);
-    top: 50%;
-    position: absolute;
-  }
-`;
-
-const ArtistList = styled.ul`
-  overflow: auto;
-  height: 99%;
-  width: 50%;
-  padding-left: 3%;
-  padding-top: 1%;
-  background-color: ${props => props.theme.bwPrimary};
-  color: ${props => props.theme.bwSecondary};
-  border-right 1px solid ${props => props.theme.color};
-`;
-const ArtistProfile = styled.ul`
-  overflow: auto;
-  height: 99%;
-  width: 50%;
-  padding-left: 3%;
-  padding-top: 1%;
-  background-color: ${props => props.theme.bwPrimary};
-  color: ${props => props.theme.bwSecondary};
-
-  h1 {
-    text-align: center;
-    padding: 10px;
-    &:first-child {
-      margin-top: 40px;
-    }
-  }
-  h2 {
-    text-align: left;
-    width: 65%;
-    margin: 0 auto;
-    padding: 10px;
-  }
-`;
-const DiscogWrapper = styled.ul`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-
-  h1 {
-    text-align: center;
-    font-size: 1.25em;
-  }
-`;
-const ArtistInitial = styled.p`
-  float: right;
-  position: relative;
-  width: 40px;
-  margin-right: 50px;
-  right: -40px;
-  text-align: center;
-`;
-function Artists(props) {
+function Artists() {
   const [artists, setArtists] = useState([]);
   const [sortOrder, setSortOrder] = useState('descending');
-  const [selectedArtist, setSelectedArtist] = useState();
 
   async function fetchArtists() {
     const res = await axios('http://localhost:3001/api/getArtists');
@@ -108,26 +21,13 @@ function Artists(props) {
 
   const mappedArtistList = artists.sort(compareArtist).map(artist => {
     return (
-      <AlbumItem
-        onMouseEnter={() => setSelectedArtist(artist)}
-        className={artist.Artist_name === 'Björk' ? 'björk' : 'not_björk'}
-        key={artist.Artist_name}
-      >
-        <Link
-          to={`/artist/${artist.Artist_id}-${artist.Artist_name.replace(
-            /\s+/g,
-            '-'
-          ).toLowerCase()}/`}
-        >
-          {artist.Artist_name.length > 45
-            ? `${artist.Artist_name.toUpperCase().substring(0, 25)}...`
-            : `${artist.Artist_name.toUpperCase()}`}
-          <ArtistInitial>{artist.Artist_name.substring(0, 1)}</ArtistInitial>
-        </Link>
-      </AlbumItem>
+      <ArtistLinkItem
+        key={artist.Artist_id}
+        artistId={artist.Artist_id}
+        artistName={artist.Artist_name}
+      />
     );
   });
-  console.log(selectedArtist);
   return (
     <React.Fragment>
       <NavElement>
@@ -135,29 +35,9 @@ function Artists(props) {
       </NavElement>
       <MainWrapper>
         <ArtistSortBar sortOrder={sortOrder} setSortOrder={setSortOrder} />
-        <SubWrapper>
-          <ArtistList>
-            {sortOrder === 'ascending' ? mappedArtistList.reverse() : mappedArtistList}
-          </ArtistList>
-          <ArtistProfile>
-            {selectedArtist === undefined ? (
-              <h1>Hover over artists for more info</h1>
-            ) : (
-              <React.Fragment>
-                <h1>{selectedArtist.Artist_name}</h1>
-                <h2>
-                  Formed: {selectedArtist.Debut_year}, {selectedArtist.City}
-                  {selectedArtist.Country}
-                </h2>
-                <h2>Genres: {selectedArtist.Genre}</h2>
-                <h1>Discography</h1>
-                <DiscogWrapper>
-                  <DiscographyList artistID={selectedArtist.Artist_id} />
-                </DiscogWrapper>
-              </React.Fragment>
-            )}
-          </ArtistProfile>
-        </SubWrapper>
+        <SecondaryWrapperList>
+          {sortOrder === 'ascending' ? mappedArtistList.reverse() : mappedArtistList}
+        </SecondaryWrapperList>
       </MainWrapper>
     </React.Fragment>
   );

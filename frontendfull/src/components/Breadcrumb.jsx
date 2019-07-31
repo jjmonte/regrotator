@@ -1,16 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-const BreadCrumbWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  background-color: ${props => props.theme.color};
-  height: 9.4%;
-  width: 100%;
-  position: relative;
-`;
+import { TopBarWrapper } from '../pages/PagesElements';
 const CrumbList = styled.ul`
   display: flex;
   flex-direction: row;
@@ -31,7 +22,7 @@ const CrumbItem = styled.li`
 
 function BreadCrumb(props) {
   return (
-    <BreadCrumbWrapper>
+    <TopBarWrapper>
       <CrumbList>
         <CrumbItem>
           <Link to={`/archive/`}>Artists</Link>
@@ -61,7 +52,7 @@ function BreadCrumb(props) {
           ''
         )}
       </CrumbList>
-    </BreadCrumbWrapper>
+    </TopBarWrapper>
   );
 }
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function LoadArtistFormData(props) {
+function LoadArtistFormData({ loadedID }) {
   const [name, setName] = useState('');
   const [formedYear, setFormedYear] = useState('');
   const [location, setLocation] = useState('');
@@ -11,7 +11,7 @@ function LoadArtistFormData(props) {
     async function fetchData() {
       const res = await axios('http://localhost:3001/api/getSingleArtist', {
         params: {
-          Artist_ID: props.loadedID
+          Artist_ID: loadedID
         }
       });
 
@@ -21,7 +21,7 @@ function LoadArtistFormData(props) {
       setGenres(res.data.data[0].Genre);
     }
     fetchData();
-  }, [props.loadedID]);
+  }, [loadedID]);
   return (
     <React.Fragment>
       <p>

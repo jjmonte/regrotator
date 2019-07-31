@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function LoadArtistFormData(props) {
+function LoadArtistFormData({ loadedID }) {
   const [albumTitle, setAlbumTitle] = useState('');
   const [category, setCategory] = useState('');
 
@@ -13,7 +13,7 @@ function LoadArtistFormData(props) {
     async function fetchData() {
       const res = await axios('http://localhost:3001/api/getSingleAlbum', {
         params: {
-          Album_ID: props.loadedID
+          Album_ID: loadedID
         }
       });
       setAlbumTitle(res.data.data[0].Album_title);
@@ -47,7 +47,7 @@ function LoadArtistFormData(props) {
       document.title = `RegRotator: ${res.data.data[0].Album_title} by ${res.data.data[0].Artist}`;
     }
     fetchData();
-  }, [props.loadedID]);
+  }, [loadedID]);
   return (
     <React.Fragment>
       <p>

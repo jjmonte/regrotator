@@ -1,24 +1,10 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
-import styled from '@emotion/styled';
+import { FormContainer, Row } from '../../pages/AddReleaseElements';
 
 import './FormStyle.css';
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: flex-start;
-`;
-const Row = styled.span`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 10%;
-  justify-content: flex-start;
-  align-items: baseline;
-  margin-bottom: 5px;
-`;
-function AddReleaseSearch(props) {
+
+function AddReleaseSearch({ searchType, changeStep }) {
   const [searchedArtist, setName] = useState({});
   return (
     <React.Fragment>
@@ -37,11 +23,7 @@ function AddReleaseSearch(props) {
           {({ isSubmitting }) => (
             <Form>
               <Row>
-                <Field
-                  type="text"
-                  name="Searchquery"
-                  placeholder={`Search for ${props.searchType}`}
-                />
+                <Field type="text" name="Searchquery" placeholder={`Search for ${searchType}`} />
                 <button type="submit" disabled={isSubmitting}>
                   Search
                 </button>
@@ -51,7 +33,7 @@ function AddReleaseSearch(props) {
         </Formik>
       </FormContainer>
       {/* <p>Can't find an artist? Make sure your spelling is correct, then move on to next step.</p> */}
-      <button onClick={() => props.changeStep(1)}>Next Step</button>
+      <button onClick={() => changeStep(1)}>Next Step</button>
     </React.Fragment>
   );
 }

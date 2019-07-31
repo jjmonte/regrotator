@@ -2,21 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { NavElement, MainWrapper } from './PagesElements';
 
 import BreadCrumb from '../components/Breadcrumb';
 import DiscographyList from '../components/DiscographyList';
 
-const MainWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: ${props => props.theme.bwPrimary};
-  color: ${props => props.theme.bwSecondary};
-  height: 100%;
-  width: 85%;
-`;
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+
 //Magic number: font-size
 const ArtistName = styled.h1`
   font-size: 10vw;
@@ -88,6 +81,9 @@ function ArtistInfo({ match }) {
 
   return (
     <React.StrictMode>
+      <NavElement>
+        <span>ARTIST INFO</span>
+      </NavElement>
       <MainWrapper>
         <BreadCrumb artist={match.params.artist} album={null} artistID={pageArtistId} />
         <ArtistName>{name}</ArtistName>

@@ -1,24 +1,10 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styled from '@emotion/styled';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { FormContainer, Row } from '../../pages/AddReleaseElements';
 
 import './FormStyle.css';
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: flex-start;
-`;
 
-const Row = styled.span`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 10%;
-  justify-content: flex-start;
-  align-items: baseline;
-  margin-bottom: 5px;
-`;
 const Tooltip = styled.div`
   background-color: ${props => props.theme.highlightColor};
   text-align: center;
@@ -29,10 +15,9 @@ const Tooltip = styled.div`
   z-index: 1;
   right: 43%;
   top: 16%;
-
   }
 `;
-const ArtistForm = props => (
+const ArtistForm = ({ changeStep }) => (
   <FormContainer>
     <Formik
       initialValues={{
@@ -79,7 +64,7 @@ const ArtistForm = props => (
               <Field type="text" name="Genre" />
             </Row>
             <Row>
-              <button onClick={() => props.changeStep(0)}> Previous Step</button>
+              <button onClick={() => changeStep(0)}> Previous Step</button>
               <button type="submit" disabled={isSubmitting}>
                 Submit
               </button>

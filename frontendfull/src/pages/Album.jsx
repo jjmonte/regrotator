@@ -1,27 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styled from '@emotion/styled';
+
+import { NavElement, MainWrapper, SecondaryWrapper } from './PagesElements';
 
 import BreadCrumb from '../components/Breadcrumb';
 import AlbumSummary from '../components/AlbumSummary';
 import SongList from '../components/SongList';
 
-const MainWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: ${props => props.theme.bwPrimary};
-  height: 100%;
-  width: 85%;
-`;
-const SecondaryWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  height: 91%;
-  width: 100%;
-  color: ${props => props.theme.bwSecondary};
-`;
 function Album({ match }) {
   const [artistId, setArtistId] = useState('');
   const [albumTitle, setAlbumTitle] = useState('');
@@ -71,6 +56,9 @@ function Album({ match }) {
 
   return (
     <React.StrictMode>
+      <NavElement>
+        <span>ALBUM INFO</span>
+      </NavElement>
       <MainWrapper>
         <BreadCrumb artist={artist} album={match.params.album} artistID={artistId} />
         <SecondaryWrapper>

@@ -1,47 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
-import styled from '@emotion/styled';
+import { NavElement, MainWrapper, SecondaryWrapperList } from './PagesElements';
 
 import { AlbumContext } from '../contextComponents/AlbumContext';
 import SortBar from '../components/SortBar';
 import CategoryFilter from '../components/CategoryFilter';
 import AlbumLinkItem from '../components/AlbumLinkItem';
-
-const MainWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: ${props => props.theme.bwPrimary};
-  height: 100%;
-  width: 78%;
-`;
-const NavElement = styled.div`
-  margin: 0;
-  text-align: center;
-  color: white;
-  background-color: ${props => props.theme.highlightColor};
-  color: ${props => props.theme.bwPrimary};
-  height: 100%;
-  width: 7%;
-  span {
-    font-size: 3em;
-    line-height: normal;
-    letter-spacing: 0.2em;
-    transform: translateX(-50%) translateY(-50%) rotate(-90deg);
-    top: 50%;
-    position: absolute;
-  }
-`;
-
-const AlbumList = styled.ul`
-  overflow: auto;
-  height: 91%;
-  width: 97%;
-  padding-left: 3%;
-  padding-top: 4%;
-  background-color: ${props => props.theme.bwPrimary};
-`;
-//Please don't murder me jade
-//Or do? i dunno, don't let me tell you how to live your life
 
 function Rotation(props) {
   const [albums, setAlbums] = useContext(AlbumContext);
@@ -105,9 +68,9 @@ function Rotation(props) {
           useAllCategories={category === 'ALL'}
         />
         <CategoryFilter category={category} setCategory={setCategory} />
-        <AlbumList>
+        <SecondaryWrapperList needsTopSpace={true}>
           {sortOrder === 'ascending' ? mappedRotationList.reverse() : mappedRotationList}
-        </AlbumList>
+        </SecondaryWrapperList>
       </MainWrapper>
     </React.Fragment>
   );
