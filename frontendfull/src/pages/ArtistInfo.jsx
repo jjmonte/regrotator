@@ -53,7 +53,7 @@ function ArtistInfo({ match }) {
             <h2>Genres</h2>
             <h3>{genres}</h3>
           </ArtistProfile>
-          <DiscographyList artistID={pageArtistId} />
+          <DiscographyList artistID={pageArtistId} artist={match.params.artist} />
           <AddReleaseLink>
             <Link
               to={{

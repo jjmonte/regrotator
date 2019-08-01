@@ -5,25 +5,34 @@ import { AlbumContainer, AlbumCover } from '../pages/ArtistInfoElements';
 
 import albumCover from '../resources/placeholdercover-1.jpeg';
 
-function DiscographyList(props) {
+function DiscographyList({ artistID, artist }) {
   const [discography, setDiscography] = useState([]);
 
   useEffect(() => {
     async function fetchDiscography() {
       const res = await axios('http://localhost:3001/api/getAlbumNamesByArtist', {
         params: {
-          Artist_ID: props.artistID
+          Artist_ID: artistID
         }
       });
       setDiscography(res.data.data);
     }
     fetchDiscography();
-  }, [props.artistID]);
-
+  }, [artistID]);
+  console.log(discography);
   const discogAsElements = discography.map(album => (
     <AlbumContainer key={album.Album_id}>
       <Link
-        to={`/album/${album.Album_id}-${album.Album_title.replace(/\s+/g, '-').toLowerCase()}/`}
+        to={{
+          pathname: `/album/${album.Album_id}-${album.Album_title.replace(
+            /\s+/g,
+            '-'
+          ).toLowerCase()}/`,
+          state: {
+            loadedArtistName: artist,
+            loadedAlbumTitle: album.Album_title
+          }
+        }}
       >
         <AlbumCover src={albumCover} />
         <h1>{album.Album_title}</h1>

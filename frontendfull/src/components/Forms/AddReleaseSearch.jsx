@@ -24,7 +24,7 @@ function AddReleaseSearch({ searchType, changeStep }) {
             <Form>
               <Row>
                 <Field type="text" name="Searchquery" placeholder={`Search for ${searchType}`} />
-                <button type="submit" disabled={isSubmitting}>
+                <button type="submit" disabled={isSubmitting} className="form-button">
                   Search
                 </button>
               </Row>
@@ -33,7 +33,9 @@ function AddReleaseSearch({ searchType, changeStep }) {
         </Formik>
       </FormContainer>
       {/* <p>Can't find an artist? Make sure your spelling is correct, then move on to next step.</p> */}
-      <button onClick={() => changeStep(1)}>Next Step</button>
+      <button onClick={() => changeStep(1)} className="form-button">
+        Skip Step
+      </button>
     </React.Fragment>
   );
 }

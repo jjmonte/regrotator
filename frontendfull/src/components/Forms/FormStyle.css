@@ -1,15 +1,36 @@
 /* Using css instead of styled components in order to allow for ez styling */
 input {
-  width: 20%;
   background: #fafafa;
   padding: 10px;
   margin: 10px;
+  width: 80%;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.35);
   border: 1px solid #305a72;
   flex-grow: 1;
   font-size: 1em;
 }
-button .submit {
+select {
+  background: #fafafa;
+  padding: 10px;
+  margin: 10px;
+  width: 80%;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.35);
+  border: 1px solid #305a72;
+  flex-grow: 1;
+  font-size: 1em;
+}
+textarea {
+  background: #fafafa;
+  padding: 10px;
+  margin: 10px;
+  width: 90%;
+  height: 100px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.35);
+  border: 1px solid #305a72;
+  flex-grow: 1;
+  font-size: 1em;
+}
+.form-button {
   padding: 0.35em 1.2em;
   margin: 5px;
   border: 2px solid black;
@@ -22,7 +43,7 @@ button .submit {
   max-width: 25%;
 }
 
-button:hover .submit {
+.form-button:hover {
   border: 2px solid rosybrown;
   color: rosybrown;
   cursor: pointer;

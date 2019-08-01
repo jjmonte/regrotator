@@ -11,7 +11,15 @@ function AlbumLinkItem({ artist, album_id, album_title, category }) {
       key={album_id}
       needsTopSpace={true}
     >
-      <Link to={`/album/${album_id}-${album_title.toLowerCase()}/`}>
+      <Link
+        to={{
+          pathname: `/album/${album_id}-${album_title.toLowerCase()}/`,
+          state: {
+            loadedArtistName: artist,
+            loadedAlbumTitle: album_title
+          }
+        }}
+      >
         {artist === undefined
           ? `${album_title.toUpperCase()}`
           : (artist + '' + album_title).length > 45

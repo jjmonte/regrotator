@@ -4,8 +4,8 @@ import { NavElement, MainWrapper } from './PagesElements';
 import AddArtistSection from '../components/Forms/AddArtistSection';
 import AddAlbumSection from '../components/Forms/AddAlbumSection';
 
-function Album(props) {
-  document.title = `RegRotator: add release`;
+function AddRelease(props) {
+  document.title = `RegRotator: Add release`;
   return (
     <React.StrictMode>
       <NavElement>
@@ -27,4 +27,4 @@ function Album(props) {
     </React.StrictMode>
   );
 }
-export default Album;
+export default AddRelease;

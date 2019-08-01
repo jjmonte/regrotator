@@ -15,6 +15,15 @@ export const Row = styled.span`
   align-items: baseline;
   margin-bottom: 5px;
 `;
+export const PickyFieldContainer = styled.span`
+  text-align: center;
+  font-style: italic;
+  flex-grow: 1;
+`;
+export const Tooltip = styled.p`
+  color: red;
+  font-size: 1em;
+`;
 export const SectionWrapper = styled.div`
   display: flex;
   flex-direction: column;

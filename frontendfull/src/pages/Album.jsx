@@ -7,10 +7,14 @@ import BreadCrumb from '../components/Breadcrumb';
 import AlbumSummary from '../components/AlbumSummary';
 import SongList from '../components/SongList';
 
-function Album({ match }) {
+function Album({ match, location }) {
   const [artistId, setArtistId] = useState('');
-  const [albumTitle, setAlbumTitle] = useState('');
-  const [artist, setArtist] = useState('');
+  const [albumTitle, setAlbumTitle] = useState(
+    location === undefined ? null : location.state.loadedAlbumTitle
+  );
+  const [artist, setArtist] = useState(
+    location === undefined ? null : location.state.loadedArtistName
+  );
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [addDate, setAddDate] = useState('');
@@ -41,8 +45,8 @@ function Album({ match }) {
           Album_ID: pageAlbumId
         }
       });
-      setAlbumTitle(res.data.data[0].Album_title);
-      setArtist(res.data.data[0].Artist);
+      if (albumTitle === undefined) setAlbumTitle(res.data.data[0].Album_title);
+      if (artist === undefined) setArtist(res.data.data[0].Artist);
       setCategory(res.data.data[0].Category);
       setDescription(res.data.data[0].Description);
       setAddDate(res.data.data[0].Add_date);
@@ -52,8 +56,7 @@ function Album({ match }) {
     }
     fetchAlbumData();
     fetchArtistId();
-  }, [artistId, match.params.album, pageAlbumId]);
-
+  }, [albumTitle, artist, artistId, match.params.album, pageAlbumId]);
   return (
     <React.StrictMode>
       <NavElement color={'skyblue'}>

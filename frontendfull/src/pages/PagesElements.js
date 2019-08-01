@@ -58,6 +58,7 @@ export const MainWrapper = styled.div`
   background-color: ${props => props.theme.bwPrimary};
   height: 100%;
   width: 78%;
+  overflow: auto;
 `;
 export const TopBarWrapper = styled.div`
   display: flex;
