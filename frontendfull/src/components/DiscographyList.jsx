@@ -29,7 +29,7 @@ function DiscographyList({ artistID, artist }) {
             '-'
           ).toLowerCase()}/`,
           state: {
-            loadedArtistName: artist,
+            loadedArtistName: artist.substring(artist.indexOf('-') + 1),
             loadedAlbumTitle: album.Album_title
           }
         }}

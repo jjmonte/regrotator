@@ -8,6 +8,7 @@ import Album from './pages/Album';
 import Artists from './pages/Artists';
 import ArtistInfo from './pages/ArtistInfo';
 import AddRelease from './pages/AddRelease';
+import Profile from './pages/Profile';
 //Context
 import { AlbumProvider } from './contextComponents/AlbumContext';
 
@@ -28,7 +29,7 @@ const App = () => {
         <Navigation />
         <Switch>
           <Route exact path="/" />
-          <Route path="/playlists" exact />
+          <Route path="/playlists" exact component={Profile} />
           <Route path="/about" />
           <Route path="/add-release/" component={AddRelease} />
           <AlbumProvider>

@@ -7,7 +7,14 @@ import AlbumItem from '../helpers/BjorkKeyframes';
 function ArtistLinkItem({ artistId, artistName }) {
   return (
     <AlbumItem className={artistName === 'Björk' ? 'björk' : 'not_björk'} key={artistId}>
-      <Link to={`/artist/${artistId}-${artistName.replace(/\s+/g, '-').toLowerCase()}/`}>
+      <Link
+        to={{
+          pathname: `/artist/${artistId}-${artistName.replace(/\s+/g, '-').toLowerCase()}/`,
+          state: {
+            loadedArtistName: artistName
+          }
+        }}
+      >
         {artistName.length > 45
           ? `${artistName.toUpperCase().substring(0, 25)}...`
           : `${artistName.toUpperCase()}`}

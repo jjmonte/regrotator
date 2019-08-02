@@ -10,14 +10,14 @@ import DiscographyList from '../components/DiscographyList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-function ArtistInfo({ match }) {
-  const [name, setName] = useState('');
+function ArtistInfo({ match, location }) {
+  const [name, setName] = useState(location === undefined ? null : location.state.loadedArtistName);
   const [formedYear, setFormedYear] = useState('');
-  const [location, setLocation] = useState('');
+  const [artistLocation, setArtistLocation] = useState('');
   const [genres, setGenres] = useState('');
 
   const pageArtistId = match.params.artist.substring(0, match.params.artist.indexOf('-'));
-
+  console.log(location);
   useEffect(() => {
     async function fetchData() {
       const res = await axios('http://localhost:3001/api/getSingleArtist', {
@@ -25,15 +25,14 @@ function ArtistInfo({ match }) {
           Artist_ID: pageArtistId
         }
       });
-      console.log(res.data.data[0]);
-      setName(res.data.data[0].Artist_name);
+      if (name === undefined) setName(res.data.data[0].Artist_name);
       setFormedYear(res.data.data[0].Debut_year);
-      setLocation(`${res.data.data[0].City}, ${res.data.data[0].Country}`);
+      setArtistLocation(`${res.data.data[0].City}, ${res.data.data[0].Country}`);
       setGenres(res.data.data[0].Genre);
       document.title = `RegRotator: ${res.data.data[0].Artist_name}`;
     }
     fetchData();
-  }, [pageArtistId]);
+  }, [name, pageArtistId]);
 
   return (
     <React.StrictMode>
@@ -48,7 +47,7 @@ function ArtistInfo({ match }) {
             <h1>Profile</h1>
             <h2>Formed</h2>
             <h3>
-              {formedYear}, {location}
+              {formedYear}, {artistLocation}
             </h3>
             <h2>Genres</h2>
             <h3>{genres}</h3>

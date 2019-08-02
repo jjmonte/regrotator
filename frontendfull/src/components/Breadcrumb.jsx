@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { TopBarWrapperList, CrumbItem } from '../pages/PagesElements';
 
-function BreadCrumb(props) {
+function BreadCrumb({ artist, artistID, album }) {
   return (
     <TopBarWrapperList>
       <CrumbItem>
@@ -10,22 +10,46 @@ function BreadCrumb(props) {
       </CrumbItem>
       <CrumbItem> &nbsp;>&nbsp;</CrumbItem>
       <CrumbItem>
-        {props.album === null ? (
-          <Link to={`/artist/${props.artist}/`}>
-            {props.artist.substring(props.artist.indexOf('-') + 1)}
+        {album === null ? (
+          <Link
+            to={{
+              pathname: `/artist/${artist}/`,
+              state: {
+                loadedArtistName: artist,
+                loadedAlbumTitle: album
+              }
+            }}
+          >
+            {artist.substring(artist.indexOf('-') + 1)}
           </Link>
         ) : (
-          <Link to={`/artist/${props.artistID}-${props.artist}/`}>
-            {props.artist.substring(props.artist.indexOf('-') + 1)}
+          <Link
+            to={{
+              pathname: `/artist/${artistID}-${artist}/`,
+              state: {
+                loadedArtistName: artist,
+                loadedAlbumTitle: album
+              }
+            }}
+          >
+            {artist.substring(artist.indexOf('-') + 1)}
           </Link>
         )}
       </CrumbItem>
-      {props.album !== null ? (
+      {album !== null ? (
         <React.Fragment>
           <CrumbItem> &nbsp;>&nbsp;</CrumbItem>
           <CrumbItem>
-            <Link to={`/album/${props.album}/`}>
-              {props.album.substring(props.album.indexOf('-') + 1)}
+            <Link
+              to={{
+                pathname: `/album/${album}/`,
+                state: {
+                  loadedArtistName: artist,
+                  loadedAlbumTitle: album
+                }
+              }}
+            >
+              {album.substring(album.indexOf('-') + 1)}
             </Link>
           </CrumbItem>
         </React.Fragment>

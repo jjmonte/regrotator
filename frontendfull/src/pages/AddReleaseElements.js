@@ -37,10 +37,6 @@ export const SectionWrapper = styled.div`
   color: ${props => props.theme.bwSecondary};
   margin: 50px 15%;
   width: 50%;
-  svg {
-    color: green;
-    margin-left: 10px;
-  }
 `;
 export const StepHeader = styled.h2`
   margin-top: 20px;

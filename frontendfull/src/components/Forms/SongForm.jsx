@@ -22,11 +22,18 @@ function SongForm({ trackNumber, addSongForm }) {
         }}
         validate={values => {
           let errors = {};
-          // if (!values.Release_date) {
-          //   errors.Release_date = 'Required';
-          // } else if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/i.test(values.Release_date)) {
-          //   errors.Release_date = 'Format as MM/DD/YYYY';
-          // }
+          if (!values.Length) {
+            errors.Length = 'Required';
+            /** Fix regex */
+          } else if (!/^\d{0,1}:\d{0,1,2}:\d{1,2}$/i.test(values.Release_date)) {
+            errors.Length = 'Format as H:MM:SS';
+          }
+          if (!values.Song_title) {
+            errors.Song_title = 'Required';
+          }
+          if (!values.Artist) {
+            errors.Artist = 'Required';
+          }
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
