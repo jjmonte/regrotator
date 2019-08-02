@@ -9,6 +9,7 @@ input {
   flex-grow: 1;
   font-size: 1em;
 }
+
 select {
   background: #fafafa;
   padding: 10px;
@@ -47,4 +48,14 @@ textarea {
   border: 2px solid rosybrown;
   color: rosybrown;
   cursor: pointer;
+}
+.checkbox {
+  background: transparent;
+  margin: 5px;
+  padding: 0;
+  width: 25px;
+  box-shadow: none;
+  border: none;
+  flex-grow: 0;
+  font-size: 1em;
 }

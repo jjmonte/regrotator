@@ -108,15 +108,19 @@ const AlbumForm = ({ changeStep }) => (
                 <ErrorMessage name="Add_date" component={Tooltip} />
               </PickyFieldContainer>
             </Row>
-            <Row>Description:</Row>
-            <PickyFieldContainer>
-              <Field
-                component="textarea"
-                name="Description"
-                placeholder="Write a brief description of the album."
-              />
-              <ErrorMessage name="Description" component={Tooltip} />
-            </PickyFieldContainer>
+            <Row>
+              <h3>Description:</h3>
+            </Row>
+            <Row>
+              <PickyFieldContainer>
+                <Field
+                  component="textarea"
+                  name="Description"
+                  placeholder="Write a brief description of the album."
+                />
+                <ErrorMessage name="Description" component={Tooltip} />
+              </PickyFieldContainer>
+            </Row>
             <Row>
               {/** TODO: Add a dialog if any field has stuff in it asking if they really
                want to go back. This is to prevent accidental progress wipes. Maybe use

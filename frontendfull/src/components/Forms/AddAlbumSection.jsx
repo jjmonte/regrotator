@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 function AddAlbumSection({ loadedAlbumId }) {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [albumId, setAlbumId] = useState(loadedAlbumId);
   return (
     <SectionWrapper>

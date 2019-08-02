@@ -19,6 +19,11 @@ export const PickyFieldContainer = styled.span`
   text-align: center;
   font-style: italic;
   flex-grow: 1;
+  ${props =>
+    props.size &&
+    `
+    max-width: ${props.size};
+`}
 `;
 export const Tooltip = styled.p`
   color: red;
@@ -30,7 +35,7 @@ export const SectionWrapper = styled.div`
   justify-content: flex-start;
   background-color: ${props => props.theme.bwPrimary};
   color: ${props => props.theme.bwSecondary};
-  margin: 50px;
+  margin: 50px 15%;
   width: 50%;
   svg {
     color: green;

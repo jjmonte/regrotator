@@ -3,6 +3,7 @@ import { NavElement, MainWrapper } from './PagesElements';
 
 import AddArtistSection from '../components/Forms/AddArtistSection';
 import AddAlbumSection from '../components/Forms/AddAlbumSection';
+import AddSongsSection from '../components/Forms/AddSongsSection';
 
 function AddRelease(props) {
   document.title = `RegRotator: Add release`;
@@ -22,7 +23,7 @@ function AddRelease(props) {
             props.location.state === undefined ? null : props.location.state.albumToLoad
           }
         />
-        {/* <SongListForm /> */}
+        <AddSongsSection />
       </MainWrapper>
     </React.StrictMode>
   );
