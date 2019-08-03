@@ -41,6 +41,10 @@ export const SectionWrapper = styled.div`
 export const StepHeader = styled.h2`
   margin-top: 20px;
   border-bottom: 1px solid ${props => props.theme.bwSecondary};
+  svg {
+    color: green;
+    margin-left: 10px;
+  }
 `;
 export const PanelWrapper = styled.div`
   background-color: ${props => props.theme.backgroundColor};

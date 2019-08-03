@@ -39,6 +39,36 @@ router.get("/getArtists", (req, res) => {
     });
   });
 });
+router.get("/searchAlbum", (req, res) => {
+  db.query("USE rotation", function(error) {
+    if (error) throw error;
+  });
+  const albumTitle = "%" + req.query.Album_title + "%";
+  console.log("Searching for album " + albumTitle);
+  let albumLookupQuery = "SELECT * FROM ALBUM WHERE ALBUM.Album_title LIKE ?";
+  db.query(albumLookupQuery, albumTitle, function(error, results) {
+    if (error) throw error;
+    return res.json({
+      success: true,
+      data: results
+    });
+  });
+});
+router.get("/searchArtist", (req, res) => {
+  db.query("USE rotation", function(error) {
+    if (error) throw error;
+  });
+  const artistName = "%" + req.query.Artist_name + "%";
+  console.log("Searching for album " + artistName);
+  let albumLookupQuery = "SELECT * FROM ARTIST WHERE ARTIST.Artist_name LIKE ?";
+  db.query(albumLookupQuery, artistName, function(error, results) {
+    if (error) throw error;
+    return res.json({
+      success: true,
+      data: results
+    });
+  });
+});
 router.get("/getSingleAlbum", (req, res) => {
   db.query("USE rotation", function(error) {
     if (error) throw error;
