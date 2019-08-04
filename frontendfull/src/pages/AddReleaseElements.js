@@ -65,6 +65,18 @@ export const DoneHeader = styled.h2`
     margin-right: 10px;
   }
 `;
+export const ResultList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+`;
+export const ResultListItem = styled.li`
+  font-size: 1.2em;
+  padding: 0.35em 0;
+  color: ${props => props.theme.bwSecondary};
+`;
+
 export const InfoWrapper = styled.div`
   padding: 20px;
   font-size: 1.5em;

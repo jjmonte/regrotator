@@ -9,13 +9,12 @@ import ArtistForm from './ArtistForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-function AddArtistSection({ loadedArtistId }) {
+function AddArtistSection({ loadedArtistId, setArtistId }) {
   const [step, setStep] = useState(0);
-  const [artistId, setArtistId] = useState(loadedArtistId);
   return (
     <SectionWrapper>
       <h1>Artist Information:</h1>
-      {artistId != null ? (
+      {loadedArtistId != null ? (
         <FormCompleted>
           <LoadArtistFormData loadedID={loadedArtistId}></LoadArtistFormData>
         </FormCompleted>

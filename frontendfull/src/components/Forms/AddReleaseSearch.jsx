@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Formik, Form, ErrorMessage, Field } from 'formik';
 import axios from 'axios';
-import { FormContainer, Row, Tooltip } from '../../pages/AddReleaseElements';
+import { FormContainer, Row, Tooltip, ResultList } from '../../pages/AddReleaseElements';
 
+import SearchResult from './SearchResult';
 import './FormStyle.css';
 
-function AddReleaseSearch({ searchType, changeStep }) {
+function AddReleaseSearch({ searchType, changeStep, loadId, dependentId }) {
   const [foundItems, setFoundItems] = useState([]);
   const [searchedOnce, setSearchedOnce] = useState(false);
   return (
@@ -17,8 +18,8 @@ function AddReleaseSearch({ searchType, changeStep }) {
           }}
           validate={values => {
             let errors = {};
-            if (values.Searchquery.length < 3) {
-              errors.Searchquery = 'Search must be at least 3 characters long.';
+            if (values.Searchquery.length < 2) {
+              errors.Searchquery = 'Search must be at least 2 characters long.';
             }
             return errors;
           }}
@@ -26,7 +27,8 @@ function AddReleaseSearch({ searchType, changeStep }) {
             async function searchAlbum() {
               const res = await axios('http://localhost:3001/api/searchAlbum', {
                 params: {
-                  Album_title: values.Searchquery
+                  Album_title: values.Searchquery,
+                  Artist_ID: dependentId
                 }
               });
               setFoundItems(res.data.data);
@@ -61,24 +63,39 @@ function AddReleaseSearch({ searchType, changeStep }) {
             <Form>
               <Row>
                 <Field type="text" name="Searchquery" placeholder={`Search for ${searchType}`} />
-
                 <button type="submit" disabled={isSubmitting} className="form-button">
                   Search
                 </button>
               </Row>
               <Row>
-                {' '}
-                {foundItems.length === 0 && searchedOnce === true ? (
-                  <p>No {searchType.toLowerCase()}s found.</p>
+                {searchedOnce === true ? (
+                  <p>
+                    Found {foundItems.length} result{foundItems.length !== 1 ? 's' : ''}
+                  </p>
                 ) : (
-                  ''
+                  <ErrorMessage name="Searchquery" component={Tooltip} />
                 )}
-                <ErrorMessage name="Searchquery" component={Tooltip} />
               </Row>
               <Row>
-                {searchType === 'Album'
-                  ? foundItems.map(item => <p>{item.Album_title}</p>)
-                  : foundItems.map(item => <p>{item.Artist_name}</p>)}
+                <ResultList>
+                  {searchType === 'Album'
+                    ? foundItems.map(item => (
+                        <SearchResult
+                          key={item.Album_id}
+                          resultName={item.Album_title}
+                          resultId={item.Album_id}
+                          loadId={loadId}
+                        />
+                      ))
+                    : foundItems.map(item => (
+                        <SearchResult
+                          key={item.Artist_id}
+                          resultName={item.Artist_name}
+                          resultId={item.Artist_id}
+                          loadId={loadId}
+                        />
+                      ))}
+                </ResultList>
               </Row>
             </Form>
           )}

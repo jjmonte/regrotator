@@ -9,13 +9,12 @@ import LoadAlbumFormData from './LoadAlbumFormData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-function AddAlbumSection({ loadedAlbumId }) {
+function AddAlbumSection({ loadedArtistId, loadedAlbumId, setAlbumId }) {
   const [step, setStep] = useState(0);
-  const [albumId, setAlbumId] = useState(loadedAlbumId);
   return (
     <SectionWrapper>
       <h1>Album Information:</h1>
-      {albumId != null ? (
+      {loadedAlbumId != null ? (
         <FormCompleted>
           <LoadAlbumFormData loadedID={loadedAlbumId}></LoadAlbumFormData>
         </FormCompleted>
@@ -26,7 +25,12 @@ function AddAlbumSection({ loadedAlbumId }) {
             {step > 0 ? <FontAwesomeIcon icon={faCheck} /> : ''}
           </StepHeader>
           {step === 0 ? (
-            <AddReleaseSearch searchType="Album" changeStep={setStep} loadId={setAlbumId} />
+            <AddReleaseSearch
+              searchType="Album"
+              changeStep={setStep}
+              loadId={setAlbumId}
+              dependentId={loadedArtistId}
+            />
           ) : (
             ''
           )}

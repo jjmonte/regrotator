@@ -43,10 +43,15 @@ router.get("/searchAlbum", (req, res) => {
   db.query("USE rotation", function(error) {
     if (error) throw error;
   });
-  const albumTitle = "%" + req.query.Album_title + "%";
-  console.log("Searching for album " + albumTitle);
-  let albumLookupQuery = "SELECT * FROM ALBUM WHERE ALBUM.Album_title LIKE ?";
-  db.query(albumLookupQuery, albumTitle, function(error, results) {
+  const searchValues = ["%" + req.query.Album_title + "%", req.query.Artist_ID];
+  console.log(
+    "Searching for album " + searchValues[0] + " ArtistID: " + searchValues[1]
+  );
+  let albumLookupQuery =
+    "SELECT * FROM ALBUM, ALBUM_OWNERSHIP WHERE ALBUM.Album_title LIKE ?" +
+    "AND ALBUM_OWNERSHIP.Artist_id = ?" +
+    "AND ALBUM.Album_id = ALBUM_OWNERSHIP.Album_id";
+  db.query(albumLookupQuery, searchValues, function(error, results) {
     if (error) throw error;
     return res.json({
       success: true,
@@ -196,7 +201,32 @@ router.get("/getSongs", (req, res) => {
     });
   });
 });
+router.get("/addOwnership", (req, res) => {
+  console.log("fetching songs");
 
+  db.query("USE rotation", function(error) {
+    if (error) throw error;
+  });
+  const InsertValues = [req.query.Album_ID, req.query.Artist_ID];
+
+  let ownershipQuery =
+    "INSERT INTO ALBUM_OWNERSHIP SET Album_id = ?, Artist_id = ?";
+
+  db.query(ownershipQuery, InsertValues, function(error, results) {
+    if (error.code === "ER_DUP_ENTRY") {
+      return res.json({
+        success: false
+      });
+    } else if (error) {
+      throw error;
+    }
+
+    return res.json({
+      success: true,
+      data: results
+    });
+  });
+});
 //THINGS 2 ADD: all of the variables to the const,
 router.post("/addAlbum", (req, res) => {
   const {
