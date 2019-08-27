@@ -8,12 +8,11 @@ import AddSongsSection from '../components/Forms/AddSongsSection';
 
 function AddRelease(props) {
   const [formArtistId, setFormArtistId] = useState(
-    props.location.state === undefined ? null : props.location.state.artistToLoad
+    props.location.state.artistToLoad === undefined ? null : props.location.state.artistToLoad
   );
   const [formAlbumId, setFormAlbumId] = useState(
-    props.location.state === undefined ? null : props.location.state.albumToLoad
+    props.location.state.albumToLoad === undefined ? null : props.location.state.albumToLoad
   );
-
   useEffect(() => {
     async function addOwnership() {
       const res = await axios('http://localhost:3001/api/addOwnership', {
