@@ -26,3 +26,4 @@ node_modules/isarray/
 node_modules/inherits/
 
 frontend/src/montesano_jon_hw3_rnp\.c
+backend/dbcredentials.js
